@@ -33,6 +33,4 @@ const routeSettings = {
   exports: [ RouterModule ]
 })
 
-
-
 export class AppRoutingModule { }
