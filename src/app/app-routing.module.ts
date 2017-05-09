@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 // import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
+import { NavbarComponent } from './partials/navbar/navbar.component';
 
 
 const routes: Routes = [
@@ -29,7 +30,7 @@ const routeSettings = {
     CommonModule,
     RouterModule.forRoot(routes, routeSettings)
   ],
-  declarations: [],
+  declarations: [  ],
   exports: [ RouterModule ]
 })
 
