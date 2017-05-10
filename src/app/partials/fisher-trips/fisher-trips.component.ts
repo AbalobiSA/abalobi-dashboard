@@ -38,7 +38,7 @@ export class FisherTripsComponent implements OnInit {
                     this.fisher = f;
                     console.log('Fisher = ' + f);
 
-                    this.servive.getFisherTrips(f.Id).then(ts => this.trips = ts);
+                    this.service.getFisherTrips(f.Id).then(ts => this.trips = ts);
                 }.bind(this)).catch(() => this.error = true);
             }
         });
