@@ -1,33 +1,42 @@
 <div class="container">
 
-    <nav>
-        <a [routerLink]="['trips']">Trips</a>
-        <!--<a [routerLink]="['specs']">Technical Specs</a>-->
-    </nav>
+    <div class="spacer"></div>
 
     <h2 *ngIf="error === true">ERROR</h2>
 
-    <div *ngIf="error === false && fisher !== null && fisher !== undefined" class="row">
-        <div class="col-md-5">{{fisher.FirstName}}</div>
-        <div class="col-md-5">{{fisher.LastName}}</div>
-        <div class="col-md-5">{{fisher.Id}}</div>
-    </div>
+    <h1 *ngIf="error === false && fisher !== null && fisher !== undefined" class="text-center" style="width: 100%">{{fisher.FirstName}} {{fisher.LastName}}</h1>
 
-    <h1 class="text-center" style="width: 100%">{{fisher.FirstName}} {{fisher.LastName}}</h1>
+    <div class="spacer"></div>
 
-    <div class="row">
-        <div class="col-md-4">
-            <img src={{fisher.image_url__c}} />
+    <div class="row card card-1" style="padding: 24px 10px 10px 10px;">
+        <!-- Picture and details -->
+        <div *ngIf="error === false && fisher !== null && fisher !== undefined" class="col-sm-3">
+            <img class="cs-column-image" src={{fisher.image_url__c}} />
+
+            <div style="margin: 5px 5px 5px 5px;">
+                <p>
+                    Name: {{fisher.FirstName}} {{fisher.LastName}}
+                </p>
+                <p>
+                    Age: {{fisher.FirstName}}
+                </p>
+                <p>
+                    Community: {{fisher.primary_community__c}}
+                </p>
+            </div>
         </div>
-        <div class="col-md-8"></div>
+
+        <div class="col-sm-9">
+            <div class="btn-group btn-group-justified fisher-view-nav" role=group>
+                <a class="btn btn-default" routerLink="trips">Trips</a>
+                <a class="btn btn-default">Statistics</a>
+                <a class="btn btn-default">Financial Report</a>
+                <a class="btn btn-default" (click)="goBack()">Back</a>
+            </div>
+
+            <router-outlet>
+
+            </router-outlet>
+        </div>
     </div>
-
-    <router-outlet>
-
-    </router-outlet>
 </div>
-
-
-<p>
-  <button type="button" (click)="goBack()">Back</button>
-</p>

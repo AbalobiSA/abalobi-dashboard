@@ -18,6 +18,7 @@ import { ToolsComponent } from './components/tools/tools.component';
 import { FisherBlockComponent } from './partials/fisher-block/fisher-block.component';
 import { FisherDetailComponent } from './components/fisher-detail/fisher-detail.component';
 import {FishersService} from './services/fishers/fishers.service';
+import { FisherTripsComponent } from './partials/fisher-trips/fisher-trips.component';
 
 @NgModule({
     declarations: [
@@ -27,7 +28,8 @@ import {FishersService} from './services/fishers/fishers.service';
         SearchComponent,
         ToolsComponent,
         FisherBlockComponent,
-        FisherDetailComponent
+        FisherDetailComponent,
+        FisherTripsComponent
     ],
     imports: [
         BrowserModule,
