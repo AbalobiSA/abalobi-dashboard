@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 
-import {Subject} from 'rxjs/Subject';
-
 import { Fisher } from '../../objects/fisher';
 import { FishersService } from '../../services/fishers/fishers.service';
 import { FisherBlockComponent } from '../../partials/fisher-block/fisher-block.component';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-search',
     templateUrl: './search.component.html',
-    styleUrls: ['./search.component.scss'],
-    providers: [FishersService]
+    styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit {
 
@@ -18,7 +16,10 @@ export class SearchComponent implements OnInit {
 
     fishers: Fisher[];
 
-    constructor(private service: FishersService) {
+    constructor(
+        private service: FishersService,
+        private router: Router
+    ) {
     }
 
     ngOnInit() {
@@ -42,5 +43,9 @@ export class SearchComponent implements OnInit {
                 item.LastName.toLocaleLowerCase().indexOf(this.searchboxText.toLocaleLowerCase()) !== -1
             );
         }
+    }
+
+    goto(id: string): void {
+        this.router.navigateByUrl('fisher/' + id);
     }
 }

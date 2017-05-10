@@ -16,6 +16,8 @@ import { NavbarComponent } from './partials/navbar/navbar.component';
 import { SearchComponent } from './components/search/search.component';
 import { ToolsComponent } from './components/tools/tools.component';
 import { FisherBlockComponent } from './partials/fisher-block/fisher-block.component';
+import { FisherDetailComponent } from './components/fisher-detail/fisher-detail.component';
+import {FishersService} from './services/fishers/fishers.service';
 
 @NgModule({
     declarations: [
@@ -24,7 +26,8 @@ import { FisherBlockComponent } from './partials/fisher-block/fisher-block.compo
         NavbarComponent,
         SearchComponent,
         ToolsComponent,
-        FisherBlockComponent
+        FisherBlockComponent,
+        FisherDetailComponent
     ],
     imports: [
         BrowserModule,
@@ -32,7 +35,7 @@ import { FisherBlockComponent } from './partials/fisher-block/fisher-block.compo
         HttpModule,
         AppRoutingModule
     ],
-    providers: [],
+    providers: [FishersService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

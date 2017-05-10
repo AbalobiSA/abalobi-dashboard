@@ -30,8 +30,9 @@
     <div class="row border">
         <!-- FISHER BLOCKS -->
 
-        <app-fisher-block *ngFor="let fisher of (this.fishers)" [fisher]="fisher"></app-fisher-block>
-
+        <a *ngFor="let fisher of (this.fishers)" [routerLink]="['fisher/', fisher.Id]">
+            <app-fisher-block [fisher]="fisher"></app-fisher-block>
+        </a>
     </div>
 </div>
 

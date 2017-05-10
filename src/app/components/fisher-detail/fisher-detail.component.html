@@ -1,0 +1,15 @@
+<div class="container">
+
+    <h2 *ngIf="error === true">ERROR</h2>
+
+    <div *ngIf="error === false && fisher !== null && fisher !== undefined" class="row">
+        <div class="col-md-5">{{fisher.FirstName}}</div>
+        <div class="col-md-5">{{fisher.LastName}}</div>
+        <div class="col-md-5">{{fisher.Id}}</div>
+    </div>
+</div>
+
+
+<p>
+  <button type="button" (click)="goBack()">Back</button>
+</p>

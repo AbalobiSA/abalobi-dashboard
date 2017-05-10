@@ -7,6 +7,7 @@ import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './partials/navbar/navbar.component';
 import { ToolsComponent } from './components/tools/tools.component';
 import { SearchComponent } from './components/search/search.component';
+import {FisherDetailComponent} from './components/fisher-detail/fisher-detail.component';
 
 
 const routes: Routes = [
@@ -27,6 +28,10 @@ const routes: Routes = [
     {
         path: 'tools',
         component: ToolsComponent
+    },
+    {
+        path: 'search/fisher/:id',
+        component: FisherDetailComponent
     }
 ];
 
