@@ -8,14 +8,6 @@ import { Fisher } from '../../objects/fisher';
 @Injectable()
 export class FishersService {
 
-    // Local variables
-    // private localFishers: Fisher[] = [
-    //     {Id: '1', FirstName: 'A', LastName: 'a', image_url__c: 'https://images.halloweencostumes.com/products/4687/1-1/adult-scream-mask.jpg', primary_community__c: ''},
-    //     {Id: '2', FirstName: 'B', LastName: 'b', image_url__c: 'https://images.halloweencostumes.com/products/4687/1-1/adult-scream-mask.jpg', primary_community__c: ''},
-    //     {Id: '3', FirstName: 'C', LastName: 'c', image_url__c: 'https://images.halloweencostumes.com/products/4687/1-1/adult-scream-mask.jpg', primary_community__c: ''},
-    //     {Id: '4', FirstName: 'D', LastName: 'd', image_url__c: 'https://images.halloweencostumes.com/products/4687/1-1/adult-scream-mask.jpg', primary_community__c: ''},
-    //     {Id: '5', FirstName: 'E', LastName: 'e', image_url__c: 'https://images.halloweencostumes.com/products/4687/1-1/adult-scream-mask.jpg', primary_community__c: ''}
-    // ];
     private localFishers: Fisher[] = null;
 
     constructor(private http: Http) {

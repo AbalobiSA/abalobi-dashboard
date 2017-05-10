@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 
 import { Fisher } from '../../objects/fisher';
 import { FishersService } from '../../services/fishers/fishers.service';
-import { FisherBlockComponent } from '../../partials/fisher-block/fisher-block.component';
 import {Router} from '@angular/router';
 
 @Component({
@@ -12,7 +11,7 @@ import {Router} from '@angular/router';
 })
 export class SearchComponent implements OnInit {
 
-    searchboxText: string;
+    searchBoxText: string;
 
     fishers: Fisher[];
 
@@ -41,14 +40,14 @@ export class SearchComponent implements OnInit {
             }
         };
 
-        if (this.searchboxText === '') {
+        if (this.searchBoxText === '') {
             this.service.getFishers().then(f => this.fishers = f);
         } else {
-            console.log(this.searchboxText);
+            console.log(this.searchBoxText);
 
             this.fishers = this.fishers.filter(
-                item => smartFilter(this.searchboxText, item.FirstName) !== -1 ||
-                        smartFilter(this.searchboxText, item.LastName) !== -1
+                item => smartFilter(this.searchBoxText, item.FirstName) !== -1 ||
+                        smartFilter(this.searchBoxText, item.LastName) !== -1
             );
         }
     }
