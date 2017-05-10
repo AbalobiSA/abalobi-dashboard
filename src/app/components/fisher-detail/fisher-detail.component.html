@@ -1,5 +1,10 @@
 <div class="container">
 
+    <nav>
+        <a [routerLink]="['trips']">Trips</a>
+        <!--<a [routerLink]="['specs']">Technical Specs</a>-->
+    </nav>
+
     <h2 *ngIf="error === true">ERROR</h2>
 
     <div *ngIf="error === false && fisher !== null && fisher !== undefined" class="row">
@@ -7,6 +12,10 @@
         <div class="col-md-5">{{fisher.LastName}}</div>
         <div class="col-md-5">{{fisher.Id}}</div>
     </div>
+
+    <router-outlet>
+
+    </router-outlet>
 </div>
 
 

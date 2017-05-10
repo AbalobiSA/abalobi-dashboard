@@ -31,7 +31,11 @@ const routes: Routes = [
     },
     {
         path: 'search/fisher/:id',
-        component: FisherDetailComponent
+        component: FisherDetailComponent,
+        children: [
+            { path: '', redirectTo: 'trips', pathMatch: 'full' },
+            { path: 'trips', component: HomeComponent }
+        ]
     }
 ];
 
