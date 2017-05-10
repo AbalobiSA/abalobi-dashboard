@@ -35,5 +35,24 @@
 
 <div>
     <!-- All the trips -->
-    Display the trips here
+    <table style="width:100%">
+        <tr>
+            <th>Date</th>
+            <th>Trip ID</th>
+            <th>Catch Exists</th>
+            <th>Community</th>
+            <th>Main Fisher</th>
+            <th>Trip Exists</th>
+            <th>Trip Type</th>
+        </tr>
+        <tr *ngFor="let trip of this.trips">
+            <th>Date</th>
+            <th>Trip ID</th>
+            <th>Catch Exists</th>
+            <th>Community</th>
+            <th>Main Fisher</th>
+            <th>Trip Exists</th>
+            <th>Trip Type</th>
+        </tr>
+    </table>
 </div>

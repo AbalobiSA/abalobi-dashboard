@@ -31,22 +31,12 @@ export class FisherDetailComponent implements OnInit {
             } else {
                 const id = params['id'];
 
-                this.service.getFishers().then(fishers => this.assignFisher(fishers.filter(item => item.Id === id)));
+                this.service.getFisher(id).then(f => this.fisher = f).catch(() => this.error = true);
             }
         });
-    }
-
-    private assignFisher(fishers: Fisher[]): void {
-        if (fishers.length > 0) {
-            this.fisher = fishers[0];
-        } else {
-            console.log('No Fisher With This ID');
-            this.error = true;
-        }
     }
 
     private goBack(): void {
         this.location.back();
     }
-
 }

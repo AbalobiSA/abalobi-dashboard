@@ -8,7 +8,7 @@
 
     <div class="spacer"></div>
 
-    <div class="row card card-1" style="padding: 24px 10px 10px 10px;">
+    <div [hidden]="fisher === null || fisher == undefined" class="row card card-1" style="padding: 24px 10px 10px 10px;">
         <!-- Picture and details -->
         <div *ngIf="error === false && fisher !== null && fisher !== undefined" class="col-sm-3">
             <img class="cs-column-image" src={{fisher.image_url__c}} />
