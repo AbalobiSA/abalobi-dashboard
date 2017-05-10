@@ -15,6 +15,7 @@ import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './partials/navbar/navbar.component';
 import { SearchComponent } from './components/search/search.component';
 import { ToolsComponent } from './components/tools/tools.component';
+import { FisherBlockComponent } from './partials/fisher-block/fisher-block.component';
 
 @NgModule({
     declarations: [
@@ -22,7 +23,8 @@ import { ToolsComponent } from './components/tools/tools.component';
         HomeComponent,
         NavbarComponent,
         SearchComponent,
-        ToolsComponent
+        ToolsComponent,
+        FisherBlockComponent
     ],
     imports: [
         BrowserModule,
