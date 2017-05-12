@@ -1,0 +1,19 @@
+<div class="card card-1">
+
+    <div class="table-responsive">
+        <!-- All the trips -->
+        <table class="table" style="width:100%">
+            <tr>
+                <th>Community Name</th>
+                <th>Number of Members</th>
+                <th><--></th>
+            </tr>
+            <tr *ngFor="let key of this.communities.keys();">
+                <th>{{key}}</th>
+                <th>{{this.communities[key]}}</th>
+
+            </tr>
+        </table>
+    </div>
+
+</div>

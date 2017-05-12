@@ -19,6 +19,8 @@ import { FisherBlockComponent } from './partials/fisher-block/fisher-block.compo
 import { FisherDetailComponent } from './components/fisher-detail/fisher-detail.component';
 import {FishersService} from './services/fishers/fishers.service';
 import { FisherTripsComponent } from './partials/fisher-trips/fisher-trips.component';
+import { CommunitiesComponent } from './components/communities/communities.component';
+import { CommunitiesListComponent } from './components/communities-list/communities-list.component';
 
 @NgModule({
     declarations: [
@@ -29,7 +31,9 @@ import { FisherTripsComponent } from './partials/fisher-trips/fisher-trips.compo
         ToolsComponent,
         FisherBlockComponent,
         FisherDetailComponent,
-        FisherTripsComponent
+        FisherTripsComponent,
+        CommunitiesComponent,
+        CommunitiesListComponent
     ],
     imports: [
         BrowserModule,

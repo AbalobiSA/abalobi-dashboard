@@ -9,6 +9,8 @@ import { ToolsComponent } from './components/tools/tools.component';
 import { SearchComponent } from './components/search/search.component';
 import { FisherDetailComponent } from './components/fisher-detail/fisher-detail.component';
 import { FisherTripsComponent } from './partials/fisher-trips/fisher-trips.component';
+import { CommunitiesComponent } from './components/communities/communities.component';
+import {CommunitiesListComponent} from './components/communities-list/communities-list.component';
 
 
 const routes: Routes = [
@@ -36,6 +38,14 @@ const routes: Routes = [
         children: [
             { path: '', redirectTo: 'trips', pathMatch: 'full' },
             { path: 'trips', component: FisherTripsComponent }
+        ]
+    },
+    {
+        path: 'communities',
+        component:  CommunitiesComponent,
+        children: [
+            { path: '', redirectTo: 'list', pathMatch: 'full' },
+            { path: 'list', component: CommunitiesListComponent }
         ]
     }
 ];
