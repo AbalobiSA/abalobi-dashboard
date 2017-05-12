@@ -10,6 +10,8 @@ import {Trip} from '../../objects/trip';
 export class FishersService {
 
     private localFishers: Fisher[] = null;
+
+    private whosTrips = '';
     private localFisherTrips: Trip[] = null;
 
     constructor(private http: Http) {
@@ -25,16 +27,25 @@ export class FishersService {
             const ABALOBI_USER_TRIPS = 'http://197.85.186.65:8080/fisher-trips?filter%5BOwnerId%5D=' + String(id);
 
             if (this.localFisherTrips === null || this.localFisherTrips === undefined) {
+                // No trips saved in service, go fetch them
                 this.http.get(ABALOBI_USER_TRIPS).toPromise().then(function (response) {
                     this.localFisherTrips = response.json()['fisher-trips'] as Trip;
+                    this.whosTrips = id;
 
-                    console.log('GOT SOME NEW TRIPS');
                     resolve(this.localFisherTrips);
                 }.bind(this));
 
-            } else {
-                console.log('Service has fisher trip values already');
+            } else if (id === this.whosTrips && this.localFisherTrips !== null && this.localFisherTrips !== undefined) {
+                // The trips saved in service are those of the fisher currently being searched for. Just return local saved trips
                 resolve(this.localFisherTrips);
+            } else {
+                // The local saved trips are not for the searched fisher. Go get the correct ones from server.
+                this.http.get(ABALOBI_USER_TRIPS).toPromise().then(function (response) {
+                    this.localFisherTrips = response.json()['fisher-trips'] as Trip;
+                    this.whosTrips = id;
+
+                    resolve(this.localFisherTrips);
+                }.bind(this));
             }
         }.bind(this));
     }
