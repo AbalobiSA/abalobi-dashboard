@@ -4,6 +4,8 @@
 <div class="col-md-4 fisher-block-container">
     <div class="cs-fisher-block text-center card card-1">
         <h1 class="fisher-block-names">{{fisher.FirstName}} {{fisher.LastName}}</h1>
-        <img class="cs-column-image" src={{fisher.image_url__c}}>
+
+        <img *ngIf="fisher.image_url__c === undefined || fisher.image_url__c === null" class="cs-column-image" src="https://goo.gl/41hfh4">
+        <img *ngIf="fisher.image_url__c !== undefined && fisher.image_url__c !== null" class="cs-column-image" src={{fisher.image_url__c}} />
     </div>
 </div>

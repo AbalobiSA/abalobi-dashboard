@@ -14,6 +14,5 @@ export class FisherBlockComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-
   }
 }

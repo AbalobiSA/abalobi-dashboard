@@ -13,6 +13,9 @@ export class SearchComponent implements OnInit {
 
     searchBoxText: string;
 
+    error = false;
+    isLoading = true;
+
     fishers: Fisher[];
 
     constructor(
@@ -22,7 +25,10 @@ export class SearchComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.service.getFishers().then(f => this.fishers = f);
+        this.service.getFishers().then(f => {
+            this.isLoading = false;
+            this.fishers = f;
+        });
     }
 
     goFetchFishers() {
@@ -30,7 +36,7 @@ export class SearchComponent implements OnInit {
     }
 
     filter(): void {
-        console.log('FILTERING');
+        this.isLoading = true;
 
         const smartFilter = function(s, n) {
             if (n === null || n === undefined) {
@@ -41,14 +47,27 @@ export class SearchComponent implements OnInit {
         };
 
         if (this.searchBoxText === '') {
-            this.service.getFishers().then(f => this.fishers = f);
+            this.service.getFishers().then(f => {
+                this.isLoading = false;
+                this.fishers = f;
+            });
         } else {
             console.log(this.searchBoxText);
 
-            this.fishers = this.fishers.filter(
-                item => smartFilter(this.searchBoxText, item.FirstName) !== -1 ||
+            this.service.getFishers().then(
+                fishers => {
+                    this.fishers = fishers.filter(
+                        item => smartFilter(this.searchBoxText, item.FirstName) !== -1 ||
                         smartFilter(this.searchBoxText, item.LastName) !== -1
-            );
+                    );
+
+                    this.isLoading = false;
+                }).catch(() => {
+                this.error = true;
+                this.isLoading = false;
+
+                this.fishers = null;
+            });
         }
     }
 

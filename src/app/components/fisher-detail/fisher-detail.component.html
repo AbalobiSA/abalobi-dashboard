@@ -11,7 +11,8 @@
     <div [hidden]="fisher === null || fisher == undefined" class="row card card-1" style="padding: 24px 10px 10px 10px;">
         <!-- Picture and details -->
         <div *ngIf="error === false && fisher !== null && fisher !== undefined" class="col-sm-3">
-            <img class="cs-column-image" src={{fisher.image_url__c}} />
+            <img *ngIf="fisher.image_url__c === undefined || fisher.image_url__c === null" class="cs-column-image" src="https://goo.gl/41hfh4">
+            <img *ngIf="fisher.image_url__c !== undefined && fisher.image_url__c !== null" class="cs-column-image" src={{fisher.image_url__c}} />
 
             <div style="margin: 5px 5px 5px 5px;">
                 <p>

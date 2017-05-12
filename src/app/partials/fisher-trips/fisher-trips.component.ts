@@ -17,6 +17,11 @@ export class FisherTripsComponent implements OnInit {
     trips: Trip[] = null;
 
     error = false;
+    isLoading = true;
+
+    hideCancelledTrips = false;
+    hideSuccessfulTrips = false;
+    hideEmptyTrips = false;
 
     constructor(
         private route: ActivatedRoute,
@@ -38,9 +43,34 @@ export class FisherTripsComponent implements OnInit {
                     this.fisher = f;
                     console.log('Fisher = ' + f);
 
-                    this.service.getFisherTrips(f.Id).then(ts => this.trips = ts);
-                }.bind(this)).catch(() => this.error = true);
+                    this.service.getFisherTrips(f.Id).then(ts => {
+                        this.trips = ts;
+                        this.isLoading = false;
+                    });
+                }.bind(this)).catch(() => {
+                    this.error = true;
+                    this.isLoading = false;
+                });
             }
         });
+    }
+
+    filter(): void {
+
+        this.service.getFisherTrips(this.fisher.Id).then(trips => {
+            if (this.hideCancelledTrips) {
+                trips = trips.filter(item => item.trip_has__c === 'yes');
+            }
+
+            if (this.hideSuccessfulTrips) {
+                trips = trips.filter(item => item.trip_has__c === 'no' || item.trip_has__c === null);
+            }
+
+            if (this.hideEmptyTrips) {
+                trips = trips.filter(item => item.catch_has__c === 'yes');
+            }
+
+            this.trips = trips;
+        }).catch(() => this.error = true);
     }
 }

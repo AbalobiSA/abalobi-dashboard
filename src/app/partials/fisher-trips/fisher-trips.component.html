@@ -20,22 +20,28 @@
     <h3>Filters:</h3>
 
     <div class="checkbox">
-        <input type="checkbox">
+        <input type="checkbox" [(ngModel)]="hideCancelledTrips" (ngModelChange)="filter($event)">
         Hide Cancelled Trips
     </div>
     <div class="checkbox">
-        <input type="checkbox">
+        <input type="checkbox" [(ngModel)]="hideSuccessfulTrips" (ngModelChange)="filter($event)">
         Hide Successful Trips
     </div>
     <div class="checkbox">
-        <input type="checkbox">
+        <input type="checkbox" [(ngModel)]="hideEmptyTrips" (ngModelChange)="filter($event)">
         Hide Trip with no Catches
     </div>
 </div>
 
-<div>
+<div *ngIf="isLoading === true" class="text-center">
+    <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+        <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+    </svg>
+</div>
+
+<div *ngIf="isLoading === false" class="table-responsive">
     <!-- All the trips -->
-    <table style="width:100%">
+    <table class="table" style="width:100%">
         <tr>
             <th>Date</th>
             <th>Trip ID</th>
@@ -46,13 +52,13 @@
             <th>Trip Type</th>
         </tr>
         <tr *ngFor="let trip of this.trips">
-            <th>Date</th>
-            <th>Trip ID</th>
-            <th>Catch Exists</th>
-            <th>Community</th>
-            <th>Main Fisher</th>
-            <th>Trip Exists</th>
-            <th>Trip Type</th>
+            <th>{{trip.trip_date__c}}</th>
+            <th>{{trip.Id}}</th>
+            <th>{{trip.catch_has__c}}</th>
+            <th>{{trip.community__c}}</th>
+            <th>{{trip.main_fisher_id__c}}</th>
+            <th>{{trip.trip_has__c}}</th>
+            <th>{{trip.trip_type__c}}</th>
         </tr>
     </table>
 </div>
