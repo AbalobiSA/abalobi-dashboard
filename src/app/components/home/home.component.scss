@@ -34,3 +34,17 @@ p {
 .vc {
     margin-top: 17vh;
 }
+
+.max-width {
+    width: 100%;
+}
+
+.console {
+    margin-top: 50px;
+
+    color: #93a1a1;
+    background-color: #002b36;
+    font-family: Monaco,Menlo,"Ubuntu Mono",Consolas,source-code-pro,monospace;
+    font-size: 14px;
+    max-height: 100vh;
+}

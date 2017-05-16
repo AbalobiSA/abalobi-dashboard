@@ -6,3 +6,29 @@
         <p>A simple tool with which to manage our node server.</p>
     </div>
 </div>
+
+<div class="container">
+    <!-- Buttons -->
+    <div class="row max-width">
+        <div class="col-md-3">
+            <button class="max-width btn btn-primary" (click)="createRequest()">Run ODK Publisher</button>
+        </div>
+        <div class="col-md-3">
+            <button class="max-width btn btn-primary" (click)="downloadFisherForms()">Download Fisher Forms</button>
+        </div>
+        <div class="col-md-3">
+            <button class="max-width btn btn-primary">Actual Download Button</button>
+        </div>
+        <div class="col-md-3">
+            <button class="max-width btn btn-danger" (click)="clearConsole()">Clear Info</button>
+        </div>
+    </div>
+
+    <!-- Console -->
+    <pre class="console max-width">
+        {{consoleText}}
+    </pre>
+</div>
+
+
+
