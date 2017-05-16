@@ -5,15 +5,19 @@
 <div>
     From Date:
 </div>
-<div style="border: 1px solid black; width: 100%">
-    Add datepicker
+<div>
+    <label style="width: 100%">
+        <input [(ngModel)]="startDate" (ngModelChange)="filter(startDate = $event)" class="form-control" type="date" name="sday">
+    </label>
 </div>
 
 <div>
     To Date:
 </div>
-<div style="border: 1px solid black; width: 100%">
-    Add datepicker
+<div>
+    <label style="width: 100%">
+        <input [(ngModel)]="endDate" (ngModelChange)="filter($event)" class="form-control" type="date" name="eday">
+    </label>
 </div>
 
 <div>

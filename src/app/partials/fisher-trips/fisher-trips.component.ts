@@ -23,6 +23,9 @@ export class FisherTripsComponent implements OnInit {
     hideSuccessfulTrips = false;
     hideEmptyTrips = false;
 
+    startDate: string = null;
+    endDate: string = null;
+
     constructor(
         private route: ActivatedRoute,
         private service: FishersService) {
@@ -57,7 +60,18 @@ export class FisherTripsComponent implements OnInit {
 
     filter(): void {
 
+        console.log('FILTERING');
+        console.log('StartDate = ' + this.startDate);
+
         this.service.getFisherTrips(this.fisher.Id).then(trips => {
+            if (this.startDate !== null && this.startDate !== undefined && this.startDate !== '') {
+                trips = trips.filter(item => (new Date(item.trip_date__c)).getTime() >= (new Date(this.startDate)).getTime());
+            }
+
+            if (this.endDate !== null && this.endDate !== undefined && this.endDate !== '') {
+                trips = trips.filter(item => (new Date(item.trip_date__c)).getTime() <= (new Date(this.endDate)).getTime());
+            }
+
             if (this.hideCancelledTrips) {
                 trips = trips.filter(item => item.trip_has__c === 'yes');
             }
@@ -71,6 +85,10 @@ export class FisherTripsComponent implements OnInit {
             }
 
             this.trips = trips;
-        }).catch(() => this.error = true);
+        }).catch(err => {
+            console.log(err);
+
+            this.error = true;
+        });
     }
 }
