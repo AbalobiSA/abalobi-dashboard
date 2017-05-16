@@ -1,4 +1,4 @@
-<div class="card card-1">
+<div *ngIf="isLoading === false" class="card card-1">
 
     <div class="table-responsive">
         <!-- All the trips -->
@@ -8,12 +8,17 @@
                 <th>Number of Members</th>
                 <th><--></th>
             </tr>
-            <tr *ngFor="let key of this.communities.keys();">
+            <tr *ngFor="let key of (this.communities | keys)">
                 <th>{{key}}</th>
                 <th>{{this.communities[key]}}</th>
-
+                <th>-_-</th>
             </tr>
         </table>
     </div>
+</div>
 
+<div *ngIf="isLoading === true" class="text-center">
+    <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+        <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+    </svg>
 </div>

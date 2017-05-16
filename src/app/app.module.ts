@@ -22,6 +22,8 @@ import { FisherTripsComponent } from './partials/fisher-trips/fisher-trips.compo
 import { CommunitiesComponent } from './components/communities/communities.component';
 import { CommunitiesListComponent } from './components/communities-list/communities-list.component';
 
+import {KeysPipe} from './pipes/key-pipe';
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -33,7 +35,9 @@ import { CommunitiesListComponent } from './components/communities-list/communit
         FisherDetailComponent,
         FisherTripsComponent,
         CommunitiesComponent,
-        CommunitiesListComponent
+        CommunitiesListComponent,
+
+        KeysPipe
     ],
     imports: [
         BrowserModule,
