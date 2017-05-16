@@ -58,10 +58,10 @@ export class FisherTripsComponent implements OnInit {
         });
     }
 
+    /**
+     * Filter trips
+     */
     filter(): void {
-
-        console.log('FILTERING');
-        console.log('StartDate = ' + this.startDate);
 
         this.service.getFisherTrips(this.fisher.Id).then(trips => {
             if (this.startDate !== null && this.startDate !== undefined && this.startDate !== '') {
