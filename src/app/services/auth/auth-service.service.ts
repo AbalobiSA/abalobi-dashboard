@@ -31,6 +31,10 @@ export class AuthService {
                 this.setSession(authResult);
                 this.router.navigate(['/home']);
             } else if (err) {
+                // Error occurred to try login again
+                this.login();
+            } else {
+                // Not all fields are present so try login again
                 this.login();
             }
         });
@@ -50,6 +54,7 @@ export class AuthService {
         localStorage.removeItem('id_token');
         localStorage.removeItem('expires_at');
 
+        console.log('User logged out');
         this.login();
     }
 
