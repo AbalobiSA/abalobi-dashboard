@@ -18,6 +18,7 @@
                 <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="search">Search</a></li>
                 <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="communities">Communities</a></li>
                 <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="tools">Tools</a></li>
+                <li class="nav-item" *ngIf="auth.isAuthenticated()"><a class="nav-link" (click)="auth.logout()">Logout</a></li>
                 <!--Left side links-->
                 <!--{{#link-to 'index' tagName="li"}} <a href="#"><i class="fa fa-fw fa-home"></i> Home </a>{{/link-to}}-->
                 <!--{{#link-to 'fishers' tagName="li"}} <a href="#"><i class="fa fa-fw fa-users"></i> Fishers </a>{{/link-to}}-->

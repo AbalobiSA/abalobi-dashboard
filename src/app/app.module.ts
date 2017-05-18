@@ -21,8 +21,9 @@ import {FishersService} from './services/fishers/fishers.service';
 import { FisherTripsComponent } from './partials/fisher-trips/fisher-trips.component';
 import { CommunitiesComponent } from './components/communities/communities.component';
 import { CommunitiesListComponent } from './components/communities-list/communities-list.component';
+import { AuthService } from './services/auth/auth-service.service';
 
-import {KeysPipe} from './pipes/key-pipe';
+import { KeysPipe } from './pipes/key-pipe';
 
 @NgModule({
     declarations: [
@@ -45,7 +46,7 @@ import {KeysPipe} from './pipes/key-pipe';
         HttpModule,
         AppRoutingModule
     ],
-    providers: [FishersService],
+    providers: [FishersService, AuthService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
