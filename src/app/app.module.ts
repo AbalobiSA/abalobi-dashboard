@@ -6,6 +6,8 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 
+import { Angular2FontAwesomeModule } from 'angular2-font-awesome/angular2-font-awesome';
+
 /*============================================================================
  Route Imports
  ============================================================================*/
@@ -44,7 +46,8 @@ import { KeysPipe } from './pipes/key-pipe';
         BrowserModule,
         FormsModule,
         HttpModule,
-        AppRoutingModule
+        AppRoutingModule,
+        Angular2FontAwesomeModule
     ],
     providers: [FishersService, AuthService],
     bootstrap: [AppComponent]

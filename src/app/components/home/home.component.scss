@@ -1,50 +1,57 @@
-.hover-div:hover {
-    @extend .hover
-}
+/*============================================================================
+    Home page css
+ ============================================================================*/
+
+/*============================================================================
+    Colors:
+ ============================================================================*/
+
+$console-color: #002b36;
 
 body {
-    background: #FFFFFF;
+    //background: #FFFFFF;
 }
 
 h1 {
-    color: #FFFFFF;
-    text-transform: uppercase;
-    font: bold 100px/1 Helvetica, Verdana, sans-serif;
+    color: white;
+    //text-transform: uppercase;
+    //font: bold 100px/1 Helvetica, Verdana, sans-serif;
 }
 
 p {
-    color: #FFFFFF;
-    font: bold 20px/1 Helvetica, Verdana, sans-serif;
+    //color: #FFFFFF;
+    //font: bold 20px/1 Helvetica, Verdana, sans-serif;
 }
 
-.hover {
-    -webkit-transform: scale(1.15);
-    -ms-transform: scale(1.15);
-    transform: scale(1.15);
-}
 
 .main-banner {
-    background: url('../../../assets/images/fishing_boat.jpg') center no-repeat;
+    //background: url('../../../assets/images/fishing_boat.jpg') center no-repeat;
     background-size: cover;
+    background-color: $console-color;
 
     position: relative;
-    min-height: 500px;
-}
-
-.vc {
-    margin-top: 17vh;
-}
-
-.max-width {
-    width: 100%;
+    //min-height: 500px;
 }
 
 .console {
     margin-top: 50px;
-
+    border: 0;
     color: #93a1a1;
     background-color: #002b36;
     font-family: Monaco,Menlo,"Ubuntu Mono",Consolas,source-code-pro,monospace;
     font-size: 14px;
     max-height: 100vh;
+}
+
+.bgContainer-home {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: darkslategrey;
+    z-index: 1;
+    height: auto;
+    overflow: auto;
+    //min-height: 100vh;
 }

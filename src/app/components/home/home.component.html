@@ -1,34 +1,34 @@
-<div class="jumbotron text-center main-banner">
-    <div class="hover-div">
-        <h1 class="vc">
-            Abalobi Server
-        </h1>
-        <p>A simple tool with which to manage our node server.</p>
-    </div>
-</div>
+<div class="bgContainer-home">
+    <div>
+        <div class="jumbotron text-center main-banner">
+            <div class="hover-div">
+                <h1 class="vc">
+                    Abalobi Dashboard <fa name="tint"></fa>
+                </h1>
+                <p class="white-text">An overview of the Abalobi systems.</p>
+            </div>
+        </div>
 
-<div class="container">
-    <!-- Buttons -->
-    <div class="row max-width">
-        <div class="col-md-3">
-            <button class="max-width btn btn-primary" (click)="createRequest()">Run ODK Publisher</button>
-        </div>
-        <div class="col-md-3">
-            <button class="max-width btn btn-primary" (click)="downloadFisherForms()">Download Fisher Forms</button>
-        </div>
-        <div class="col-md-3">
-            <button class="max-width btn btn-primary">Actual Download Button</button>
-        </div>
-        <div class="col-md-3">
-            <button class="max-width btn btn-danger" (click)="clearConsole()">Clear Info</button>
-        </div>
-    </div>
+        <div class="container">
+            <!-- Buttons -->
+            <div class="row max-width">
+                <div class="col-md-6">
+                    <button class="max-width btn btn-primary btn-block" (click)="downloadFisherForms()"><fa name="download"></fa>Download Fisher Forms</button>
+                </div>
+                <div class="col-md-6">
+                    <button class="max-width btn btn-danger btn-block" (click)="clearConsole()">Clear Info</button>
+                </div>
+            </div>
 
-    <!-- Console -->
-    <pre class="console max-width">
+            <!-- Console -->
+            <pre class="console max-width">
         {{consoleText}}
     </pre>
+        </div>
+    </div>
 </div>
+
+
 
 
 
