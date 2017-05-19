@@ -12,12 +12,14 @@
  ============================================================================*/
 body{
     //background-color: $ASPHALT;
-    background-color: $LIGHTGREEN;
+    //background-color: $LIGHTGREEN;
 }
 
 
 .nav-padder{
     margin-top: 50px;
+    position: relative;
+    bottom: 0;
 }
 
 /*============================================================================

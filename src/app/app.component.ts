@@ -10,7 +10,7 @@ import { AuthService } from './services/auth/auth-service.service';
 export class AppComponent {
 
     constructor(public auth: AuthService) {
-        auth.handleAuthentication();
+        // auth.handleAuthentication();
 
         // auth.login();
     }
