@@ -1,0 +1,21 @@
+<h1>Send an sms to a fisher</h1>
+<!-- Split button -->
+<!--<div class="form-group">-->
+    <!--<label for="sel1">Select list:</label>-->
+    <!--<select class="form-control" id="sel1">-->
+        <!--<option>Send to mobile number</option>-->
+        <!--<option>Search for fisher name</option>-->
+    <!--</select>-->
+<!--</div>-->
+
+<div class="cs-spacer"></div>
+<div class="input-group">
+    <span class="input-group-addon" id="basic-addon1">Mobile Number</span>
+    <input type="text" class="form-control" placeholder="082 123 4567" aria-describedby="basic-addon1">
+</div>
+<div class="cs-spacer"></div>
+<div class="form-group">
+    <label for="comment">Message:</label>
+    <textarea class="form-control" rows="5" id="comment"></textarea>
+</div>
+<button class="btn btn-default" (click)="sendMessage()">Send message</button>
