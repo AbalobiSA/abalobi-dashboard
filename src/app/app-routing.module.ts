@@ -10,7 +10,9 @@ import { SearchComponent } from './components/search/search.component';
 import { FisherDetailComponent } from './components/fisher-detail/fisher-detail.component';
 import { FisherTripsComponent } from './partials/fisher-trips/fisher-trips.component';
 import { CommunitiesComponent } from './components/communities/communities.component';
-import {CommunitiesListComponent} from './components/communities-list/communities-list.component';
+import { CommunitiesListComponent } from './components/communities-list/communities-list.component';
+import { MessagingComponent } from './partials/messaging/messaging.component';
+import { ToolsOverviewComponent } from './partials/tools-overview/tools-overview.component';
 
 
 const routes: Routes = [
@@ -30,7 +32,22 @@ const routes: Routes = [
     },
     {
         path: 'tools',
-        component: ToolsComponent
+        component: ToolsComponent,
+        children: [
+            {
+                path: '',
+                redirectTo: 'messaging',
+                pathMatch: 'full'
+            },
+            {
+                path: 'messaging',
+                component: MessagingComponent
+            },
+            {
+                path: 'overview',
+                component: ToolsOverviewComponent
+            }
+        ]
     },
     {
         path: 'search/fisher/:id',

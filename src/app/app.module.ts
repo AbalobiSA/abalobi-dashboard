@@ -26,6 +26,8 @@ import { CommunitiesListComponent } from './components/communities-list/communit
 import { AuthService } from './services/auth/auth-service.service';
 
 import { KeysPipe } from './pipes/key-pipe';
+import { MessagingComponent } from './partials/messaging/messaging.component';
+import { ToolsOverviewComponent } from './partials/tools-overview/tools-overview.component';
 
 @NgModule({
     declarations: [
@@ -40,7 +42,11 @@ import { KeysPipe } from './pipes/key-pipe';
         CommunitiesComponent,
         CommunitiesListComponent,
 
-        KeysPipe
+        KeysPipe,
+
+        MessagingComponent,
+
+        ToolsOverviewComponent
     ],
     imports: [
         BrowserModule,
