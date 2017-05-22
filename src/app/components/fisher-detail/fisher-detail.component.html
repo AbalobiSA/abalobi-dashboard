@@ -1,43 +1,49 @@
-<div class="container">
+<div class="bgContainer-trips">
+    <div>
 
-    <div class="spacer"></div>
+        <div class="container">
 
-    <h2 *ngIf="error === true">ERROR</h2>
+            <div class="spacer"></div>
 
-    <h1 *ngIf="error === false && fisher !== null && fisher !== undefined" class="text-center" style="width: 100%">{{fisher.FirstName}} {{fisher.LastName}}</h1>
+            <h2 *ngIf="error === true">ERROR</h2>
 
-    <div class="spacer"></div>
+            <h1 *ngIf="error === false && fisher !== null && fisher !== undefined" class="text-center white" style="width: 100%">{{fisher.FirstName}} {{fisher.LastName}}</h1>
 
-    <div [hidden]="fisher === null || fisher == undefined" class="row card card-1" style="padding: 24px 10px 10px 10px;">
-        <!-- Picture and details -->
-        <div *ngIf="error === false && fisher !== null && fisher !== undefined" class="col-sm-3">
-            <img *ngIf="fisher.image_url__c === undefined || fisher.image_url__c === null" class="cs-column-image" src="https://goo.gl/41hfh4">
-            <img *ngIf="fisher.image_url__c !== undefined && fisher.image_url__c !== null" class="cs-column-image" src={{fisher.image_url__c}} />
+            <div class="spacer"></div>
 
-            <div style="margin: 5px 5px 5px 5px;">
-                <p>
-                    Name: {{fisher.FirstName}} {{fisher.LastName}}
-                </p>
-                <p>
-                    Age: {{fisher.FirstName}}
-                </p>
-                <p>
-                    Community: {{fisher.primary_community__c}}
-                </p>
+            <div [hidden]="fisher === null || fisher == undefined" class="row card card-1" style="padding: 24px 10px 10px 10px;">
+                <!-- Picture and details -->
+                <div *ngIf="error === false && fisher !== null && fisher !== undefined" class="col-sm-3">
+                    <img *ngIf="fisher.image_url__c === undefined || fisher.image_url__c === null" class="cs-column-image" src="https://goo.gl/41hfh4">
+                    <img *ngIf="fisher.image_url__c !== undefined && fisher.image_url__c !== null" class="cs-column-image" src={{fisher.image_url__c}} />
+
+                    <div style="margin: 5px 5px 5px 5px;">
+                        <p>
+                            Name: {{fisher.FirstName}} {{fisher.LastName}}
+                        </p>
+                        <p>
+                            Age: {{fisher.FirstName}}
+                        </p>
+                        <p>
+                            Community: {{fisher.primary_community__c}}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-sm-9">
+                    <div class="btn-group btn-group-justified fisher-view-nav" role=group>
+                        <a class="btn btn-default" routerLinkActive="active" routerLink="trips">Trips</a>
+                        <a class="btn btn-default"routerLinkActive="active" >Statistics</a>
+                        <a class="btn btn-default"routerLinkActive="active" >Financial Report</a>
+                        <a class="btn btn-default" routerLinkActive="active" (click)="goBack()">Back</a>
+                    </div>
+
+                    <router-outlet>
+
+                    </router-outlet>
+                </div>
             </div>
         </div>
 
-        <div class="col-sm-9">
-            <div class="btn-group btn-group-justified fisher-view-nav" role=group>
-                <a class="btn btn-default" routerLinkActive="active" routerLink="trips">Trips</a>
-                <a class="btn btn-default"routerLinkActive="active" >Statistics</a>
-                <a class="btn btn-default"routerLinkActive="active" >Financial Report</a>
-                <a class="btn btn-default" routerLinkActive="active" (click)="goBack()">Back</a>
-            </div>
-
-            <router-outlet>
-
-            </router-outlet>
-        </div>
     </div>
 </div>
