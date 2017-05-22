@@ -16,5 +16,4 @@ export class MessagingComponent implements OnInit {
         alert('Message sent!');
     }
 
-
 }

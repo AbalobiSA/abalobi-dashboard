@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import {Http} from '@angular/http';
+import { Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
 import { Fisher } from '../../objects/fisher';
-import {Trip} from '../../objects/trip';
+import { Registration } from '../../objects/registration';
+import { Trip } from '../../objects/trip';
 
 @Injectable()
 export class FishersService {
@@ -13,8 +14,10 @@ export class FishersService {
 
     private whosTrips = '';
     private localFisherTrips: Trip[] = null;
+    private localNewRegistrations: Registration[] = null;
 
     constructor(private http: Http) {
+
     }
 
     /**
@@ -80,6 +83,25 @@ export class FishersService {
                const f = fishers.filter(item => item.Id === id)[0];
                resolve(f);
             }).catch(() => reject());
+        }.bind(this));
+    }
+
+    getNewRegistrations(): Promise<Registration[]> {
+
+        return new Promise(function (resolve, reject) {
+            const QUERY = 'http://197.85.186.65:8080/registrations_new';
+
+            if (this.localNewRegistrations === null || this.localNewRegistrations === undefined) {
+                // No trips saved in service, go fetch them
+                this.http.get(QUERY).toPromise().then(function (response) {
+                    this.localNewRegistrations = response.json()['registrations'] as Registration;
+                    resolve(this.localNewRegistrations);
+                }.bind(this));
+
+            } else {
+                // The trips saved in service are those of the fisher currently being searched for. Just return local saved trips
+                resolve(this.localNewRegistrations);
+            }
         }.bind(this));
     }
 }
