@@ -3,11 +3,14 @@
  */
 export class Registration {
 
-    Id: string;
-    name: string;
-    surname: string;
+    // Id: string;
+    name__c: string;
+    surname__c: string;
     home_community__c: string;
-    cell_number__c: string;
-    created_date: string;
+    // cell_number__c: string;
+    CreatedDate: string;
+    AA_have_sent_SMS__c: string;
+    AA_has_been_processed__c: string;
+    usertype__c: string;
 
 }

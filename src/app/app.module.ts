@@ -28,6 +28,7 @@ import { AuthService } from './services/auth/auth-service.service';
 import { KeysPipe } from './pipes/key-pipe';
 import { MessagingComponent } from './partials/messaging/messaging.component';
 import { ToolsOverviewComponent } from './partials/tools-overview/tools-overview.component';
+import { RegistrationsComponent } from './partials/registrations/registrations.component';
 
 @NgModule({
     declarations: [
@@ -46,7 +47,9 @@ import { ToolsOverviewComponent } from './partials/tools-overview/tools-overview
 
         MessagingComponent,
 
-        ToolsOverviewComponent
+        ToolsOverviewComponent,
+
+        RegistrationsComponent
     ],
     imports: [
         BrowserModule,

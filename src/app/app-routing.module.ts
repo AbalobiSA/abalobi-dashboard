@@ -13,6 +13,8 @@ import { CommunitiesComponent } from './components/communities/communities.compo
 import { CommunitiesListComponent } from './components/communities-list/communities-list.component';
 import { MessagingComponent } from './partials/messaging/messaging.component';
 import { ToolsOverviewComponent } from './partials/tools-overview/tools-overview.component';
+import { RegistrationsComponent } from './partials/registrations/registrations.component';
+
 
 
 const routes: Routes = [
@@ -46,6 +48,10 @@ const routes: Routes = [
             {
                 path: 'overview',
                 component: ToolsOverviewComponent
+            },
+            {
+                path: 'registrations',
+                component: RegistrationsComponent
             }
         ]
     },
