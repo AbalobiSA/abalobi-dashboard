@@ -44,7 +44,6 @@ export class MessagingComponent implements OnInit {
     }
 
     test(selected: CompleterItem): void {
-        // TODO: Make so that this uses the fisher's cellphone number
         this.cellnum = selected ? selected.originalObject.contact_mobile_num__c
             ? selected.originalObject.contact_mobile_num__c : 'No number on record' : null;
     }

@@ -9,4 +9,6 @@ export class Fisher {
     image_url__c: string;
 
     contact_mobile_num__c: string;
+
+    date_of_birth__c: string;
 }
