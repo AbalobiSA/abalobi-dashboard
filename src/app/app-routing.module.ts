@@ -14,6 +14,8 @@ import { CommunitiesListComponent } from './components/communities-list/communit
 import { MessagingComponent } from './partials/messaging/messaging.component';
 import { ToolsOverviewComponent } from './partials/tools-overview/tools-overview.component';
 import { RegistrationsComponent } from './partials/registrations/registrations.component';
+import {OdkComponent} from './partials/odk/odk.component';
+import {FisherBioComponent} from './partials/fisher-bio/fisher-bio.component';
 
 
 
@@ -52,6 +54,10 @@ const routes: Routes = [
             {
                 path: 'registrations',
                 component: RegistrationsComponent
+            },
+            {
+                path: 'odk',
+                component: OdkComponent
             }
         ]
     },
@@ -60,7 +66,8 @@ const routes: Routes = [
         component: FisherDetailComponent,
         children: [
             { path: '', redirectTo: 'trips', pathMatch: 'full' },
-            { path: 'trips', component: FisherTripsComponent }
+            { path: 'trips', component: FisherTripsComponent },
+            { path: 'bio', component: FisherBioComponent }
         ]
     },
     {
