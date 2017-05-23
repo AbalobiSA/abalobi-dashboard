@@ -15,10 +15,10 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="home">Home</a></li>
-                <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="search">Search</a></li>
+                <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="tools">Administration</a></li>
+                <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="search">Fishers</a></li>
                 <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="communities">Communities</a></li>
-                <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="tools">Tools</a></li>
-                <li class="nav-item" *ngIf="auth.isAuthenticated()"><a class="nav-link" (click)="auth.logout()">Logout</a></li>
+
                 <!--Left side links-->
                 <!--{{#link-to 'index' tagName="li"}} <a href="#"><i class="fa fa-fw fa-home"></i> Home </a>{{/link-to}}-->
                 <!--{{#link-to 'fishers' tagName="li"}} <a href="#"><i class="fa fa-fw fa-users"></i> Fishers </a>{{/link-to}}-->
@@ -52,7 +52,7 @@
 
             <!--Right hand side-->
             <ul class="nav navbar-nav navbar-right">
-
+                <li class="nav-item" *ngIf="auth.isAuthenticated()"><a class="nav-link" (click)="auth.logout()">Logout</a></li>
                 <!--<li><a href="#">Link</a></li>-->
                 <!--<li class="dropdown">-->
                 <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>-->
