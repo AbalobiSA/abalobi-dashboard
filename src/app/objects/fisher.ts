@@ -7,4 +7,6 @@ export class Fisher {
 
     primary_community__c: string;
     image_url__c: string;
+
+    contact_mobile_num__c: string;
 }

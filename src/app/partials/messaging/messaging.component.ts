@@ -26,7 +26,7 @@ export class MessagingComponent implements OnInit {
         this.service.getFishers().then(fishers => {
             this.fishers = fishers;
 
-            this.dataService = this.completerService.local(this.fishers, 'FirstName, LastName', 'FirstName').descriptionField('LastName');
+            this.dataService = this.completerService.local(this.fishers, 'FirstName, LastName, contact_mobile_num__c', 'FirstName').descriptionField('LastName');
         }).catch(() => {
             alert('Error occurred while getting fishers');
         });
@@ -38,7 +38,8 @@ export class MessagingComponent implements OnInit {
 
     test(selected: CompleterItem): void {
         // TODO: Make so that this uses the fisher's cellphone number
-        this.cellnum = selected ? selected.originalObject.FirstName + selected.originalObject.LastName : null;
+        this.cellnum = selected ? selected.originalObject.contact_mobile_num__c
+            ? selected.originalObject.contact_mobile_num__c : 'No number on record' : null;
     }
 
 }
