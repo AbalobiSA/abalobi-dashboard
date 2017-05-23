@@ -40,8 +40,13 @@
                                         <i class="fa fa-clipboard fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">{{calc_new_registrations}}</div>
-                                        <div>New Registrations</div>
+
+                                        <div *ngIf="!registrations" class="loader"></div>
+
+                                        <div *ngIf="registrations">
+                                            <div class="huge">{{calc_new_registrations}}</div>
+                                            <div>New Registrations</div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
