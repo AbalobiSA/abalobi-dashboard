@@ -22,7 +22,7 @@ export class CommunitiesComponent implements OnInit {
 
     }
 
-    private goBack(): void {
+    goBack(): void {
         this.location.back();
     }
 }

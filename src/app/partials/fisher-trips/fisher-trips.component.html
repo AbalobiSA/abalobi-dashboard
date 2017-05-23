@@ -10,7 +10,7 @@
         </div>
         <div>
             <label style="width: 100%">
-                <input [(ngModel)]="startDate" (ngModelChange)="filter(startDate = $event)" class="form-control" type="date" name="sday">
+                <input [(ngModel)]="startDate" (ngModelChange)="filter()" class="form-control" type="date" name="sday">
             </label>
         </div>
 
@@ -19,7 +19,7 @@
         </div>
         <div>
             <label style="width: 100%">
-                <input [(ngModel)]="endDate" (ngModelChange)="filter($event)" class="form-control" type="date" name="eday">
+                <input [(ngModel)]="endDate" (ngModelChange)="filter()" class="form-control" type="date" name="eday">
             </label>
         </div>
 
@@ -27,15 +27,15 @@
             <h3>Filters:</h3>
 
             <div class="checkbox">
-                <input type="checkbox" [(ngModel)]="hideCancelledTrips" (ngModelChange)="filter($event)">
+                <input type="checkbox" [(ngModel)]="hideCancelledTrips" (ngModelChange)="filter()">
                 Hide Cancelled Trips
             </div>
             <div class="checkbox">
-                <input type="checkbox" [(ngModel)]="hideSuccessfulTrips" (ngModelChange)="filter($event)">
+                <input type="checkbox" [(ngModel)]="hideSuccessfulTrips" (ngModelChange)="filter()">
                 Hide Successful Trips
             </div>
             <div class="checkbox">
-                <input type="checkbox" [(ngModel)]="hideEmptyTrips" (ngModelChange)="filter($event)">
+                <input type="checkbox" [(ngModel)]="hideEmptyTrips" (ngModelChange)="filter()">
                 Hide Trip with no Catches
             </div>
         </div>

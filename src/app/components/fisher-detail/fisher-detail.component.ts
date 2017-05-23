@@ -36,7 +36,7 @@ export class FisherDetailComponent implements OnInit {
         });
     }
 
-    private goBack(): void {
+    goBack(): void {
         this.location.back();
     }
 }
