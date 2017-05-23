@@ -9,13 +9,17 @@
 <!--</div>-->
 
 <div class="cs-spacer"></div>
+
 <div class="input-group">
+    <ng2-completer class="form-control" [(ngModel)]="searchStr" [datasource]="dataService" [minSearchLength]="0" aria-describedby="basic-addon1" (selected)="test($event)"></ng2-completer>
     <span class="input-group-addon" id="basic-addon1">Mobile Number</span>
-    <input type="text" class="form-control" placeholder="082 123 4567" aria-describedby="basic-addon1">
+    <input type="text" class="form-control" placeholder="082 123 4567" aria-describedby="basic-addon1" [(ngModel)]="cellnum">
 </div>
+
 <div class="cs-spacer"></div>
 <div class="form-group">
     <label for="comment">Message:</label>
     <textarea class="form-control" rows="5" id="comment"></textarea>
 </div>
 <button class="btn btn-default" (click)="sendMessage()">Send message</button>
+

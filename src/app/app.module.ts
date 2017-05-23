@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 
 import { Angular2FontAwesomeModule } from 'angular2-font-awesome/angular2-font-awesome';
+import { Ng2CompleterModule } from 'ng2-completer';
 
 /*============================================================================
  Route Imports
@@ -56,7 +57,8 @@ import { RegistrationsComponent } from './partials/registrations/registrations.c
         FormsModule,
         HttpModule,
         AppRoutingModule,
-        Angular2FontAwesomeModule
+        Angular2FontAwesomeModule,
+        Ng2CompleterModule
     ],
     providers: [FishersService, AuthService],
     bootstrap: [AppComponent]
