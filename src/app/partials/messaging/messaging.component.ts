@@ -15,6 +15,7 @@ export class MessagingComponent implements OnInit {
     fishers: Fisher[];
 
     cellnum: string;
+    messageBody: string;
 
     protected dataService: CompleterData;
 
@@ -25,15 +26,21 @@ export class MessagingComponent implements OnInit {
     ngOnInit() {
         this.service.getFishers().then(fishers => {
             this.fishers = fishers;
-
-            this.dataService = this.completerService.local(this.fishers, 'FirstName, LastName, contact_mobile_num__c', 'FirstName').descriptionField('LastName');
+            this.dataService = this.completerService.local(this.fishers, 'FirstName,LastName', 'FirstName').descriptionField('LastName');
         }).catch(() => {
             alert('Error occurred while getting fishers');
         });
     }
 
     sendMessage(): void {
-        alert('Message sent!');
+        // alert('Message sent!');
+        this.service.sendSMS({
+            toNumber: this.cellnum,
+            messageBody: this.messageBody
+        }).then(response => {
+            console.log('RESPONSE: ' + response);
+            alert(JSON.parse(JSON.stringify(response)).message);
+        });
     }
 
     test(selected: CompleterItem): void {

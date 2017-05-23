@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+import { BaseRequestOptions, RequestOptions } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -104,4 +105,41 @@ export class FishersService {
             }
         }.bind(this));
     }
+
+    sendSMS(input): Promise<string> {
+
+        return new Promise(function (resolve, reject) {
+            const postURL = 'http://197.85.186.65:8080/sms_new';
+
+            const options = new RequestOptions({
+                body: {
+                    toNumber: input.toNumber,
+                    messageBody: input.messageBody,
+                    timeStamp: (new Date())
+                }
+
+            });
+
+            this.http.post(postURL, options).toPromise().then(function (response) {
+                // this.localNewRegistrations = response.json()['registrations'] as Registration;
+                // console.log(JSON.stringify(response.json(), null, 4));
+                // resolve(this.localNewRegistrations);
+                resolve(response.json());
+            }.bind(this)).catch((error) => {
+                console.log('Error occurred while sending sms');
+                console.log('ERROR: ' + error);
+                resolve({message: 'Your message failed to send!'});
+            });
+
+        }.bind(this));
+    }
 }
+/*
+ {
+ toName: '',
+ toNumber: '',
+ fromName: '',
+ fromNumber: '',
+ timeStamp: ''
+ }
+ */
