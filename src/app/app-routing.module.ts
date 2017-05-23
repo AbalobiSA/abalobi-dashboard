@@ -14,6 +14,7 @@ import { CommunitiesListComponent } from './components/communities-list/communit
 import { MessagingComponent } from './partials/messaging/messaging.component';
 import { ToolsOverviewComponent } from './partials/tools-overview/tools-overview.component';
 import { RegistrationsComponent } from './partials/registrations/registrations.component';
+import {OdkComponent} from "./partials/odk/odk.component";
 
 
 
@@ -52,6 +53,10 @@ const routes: Routes = [
             {
                 path: 'registrations',
                 component: RegistrationsComponent
+            },
+            {
+                path: 'odk',
+                component: OdkComponent
             }
         ]
     },
