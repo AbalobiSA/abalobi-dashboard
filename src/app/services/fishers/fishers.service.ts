@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { BaseRequestOptions, RequestOptions } from '@angular/http';
+import { RequestOptions } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -28,7 +28,7 @@ export class FishersService {
     getFisherTrips(id: string): Promise<Trip[]> {
 
         return new Promise(function (resolve, reject) {
-            const ABALOBI_USER_TRIPS = 'http://197.85.186.65:8080/fisher-trips?filter%5BOwnerId%5D=' + String(id);
+            const ABALOBI_USER_TRIPS = `http://197.85.186.65:8080/api/users/${String(id)}/trips`;
 
             if (this.localFisherTrips === null || this.localFisherTrips === undefined) {
                 // No trips saved in service, go fetch them
@@ -62,7 +62,7 @@ export class FishersService {
     getFishers(): Promise<Fisher[]> {
 
         return new Promise(function (resolve, reject) {
-            const ABALOBI_USERS = 'http://197.85.186.65:8080/abalobi-users';
+            const ABALOBI_USERS = 'http://197.85.186.65:8080/api/users';
 
             if (this.localFishers === null || this.localFishers === undefined) {
                 this.http.get(ABALOBI_USERS).toPromise().then(function (response) {
@@ -90,7 +90,7 @@ export class FishersService {
     getNewRegistrations(): Promise<Registration[]> {
 
         return new Promise(function (resolve, reject) {
-            const QUERY = 'http://197.85.186.65:8080/registrations_new';
+            const QUERY = 'http://197.85.186.65:8080/api/registrations_new';
 
             if (this.localNewRegistrations === null || this.localNewRegistrations === undefined) {
                 // No trips saved in service, go fetch them
@@ -109,7 +109,7 @@ export class FishersService {
     sendSMS(input): Promise<string> {
 
         return new Promise(function (resolve, reject) {
-            const postURL = 'http://197.85.186.65:8080/sms_new';
+            const postURL = 'http://197.85.186.65:8080/api/sms';
 
             const options = new RequestOptions({
                 body: {
@@ -117,7 +117,6 @@ export class FishersService {
                     messageBody: input.messageBody,
                     timeStamp: (new Date())
                 }
-
             });
 
             this.http.post(postURL, options).toPromise().then(function (response) {

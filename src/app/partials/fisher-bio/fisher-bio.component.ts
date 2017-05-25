@@ -12,6 +12,7 @@ import { FishersService } from '../../services/fishers/fishers.service';
 export class FisherBioComponent implements OnInit {
 
     fisher: Fisher = null;
+    age: number = null;
 
     error = false;
     isLoading = true;
@@ -32,15 +33,31 @@ export class FisherBioComponent implements OnInit {
                 console.log('ID = ' + id);
 
                 this.service.getFisher(id).then(function (f) {
-                    this.isLoading = false;
-
                     this.fisher = f;
                     console.log('Fisher = ' + f);
+
+                    this.calcFisherAge();
+
+                    this.isLoading = false;
                 }.bind(this)).catch(() => {
                     this.error = true;
                     this.isLoading = false;
                 });
             }
         });
+    }
+
+    calcFisherAge(): void {
+
+        const dob = new Date(this.fisher.date_of_birth__c);
+        const today = new Date();
+
+        if (!this.fisher.date_of_birth__c) {
+           this.error = true;
+        } else {
+            const diff = today.getTime() - dob.getTime();
+
+            this.age = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
+        }
     }
 }
