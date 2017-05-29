@@ -8,13 +8,15 @@
     <!--</select>-->
 <!--</div>-->
 
+<!--[inputClass]="form-control"-->
+
 <h3>Search for a fisher</h3>
 
 <ng2-completer
     [(ngModel)]="searchStr"
     [datasource]="dataService"
     [minSearchLength]="0"
-    [inputClass]="form-control"
+
     placeholder="Fisher Name"
     (selected)="test($event)">
 </ng2-completer>

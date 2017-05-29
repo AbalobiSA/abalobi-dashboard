@@ -17,7 +17,7 @@ export class MessagingComponent implements OnInit {
     cellnum: string;
     messageBody: string;
 
-    protected dataService: CompleterData;
+    dataService: CompleterData;
 
     constructor(private service: FishersService, private completerService: CompleterService) {
 
