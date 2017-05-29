@@ -165,11 +165,8 @@ export class FishersService {
         // const TOKEN = localStorage.getItem('id_token');
         // console.log("ACCESS TOKEN: " + localStorage.getItem('access_token'));
         // console.log("ID TOKEN: " + localStorage.getItem('id_token'));
-
         const HEADERS = new Headers();
         // HEADERS.append('Authorization', btoa(TOKEN));
-
-
         return new RequestOptions({headers: HEADERS});
     }
 
