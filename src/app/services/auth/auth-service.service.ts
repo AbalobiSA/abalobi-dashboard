@@ -22,6 +22,8 @@ export class AuthService {
 
     public login(): void {
         this.auth0.authorize();
+
+        console.log(localStorage.getItem('access_token'));
     }
 
     public handleAuthentication(): void {
@@ -30,11 +32,7 @@ export class AuthService {
                 window.location.hash = '';
                 this.setSession(authResult);
                 this.router.navigate(['/home']);
-            } else if (err) {
-                // Error occurred to try login again
-                this.login();
             } else {
-                // Not all fields are present so try login again
                 this.login();
             }
         });

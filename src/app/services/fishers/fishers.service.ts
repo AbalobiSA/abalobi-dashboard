@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import { RequestOptions } from '@angular/http';
+import { Http, Headers } from '@angular/http';
+import { RequestOptions, Request, RequestMethod } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -29,10 +29,11 @@ export class FishersService {
 
         return new Promise(function (resolve, reject) {
             const ABALOBI_USER_TRIPS = `http://197.85.186.65:8080/api/users/${String(id)}/trips`;
+            const OPTIONS = this.getRequestOptions();
 
             if (this.localFisherTrips === null || this.localFisherTrips === undefined) {
                 // No trips saved in service, go fetch them
-                this.http.get(ABALOBI_USER_TRIPS).toPromise().then(function (response) {
+                this.http.get(ABALOBI_USER_TRIPS, OPTIONS).toPromise().then(function (response) {
                     this.localFisherTrips = response.json()['fisher-trips'] as Trip;
                     this.whosTrips = id;
 
@@ -44,7 +45,7 @@ export class FishersService {
                 resolve(this.localFisherTrips);
             } else {
                 // The local saved trips are not for the searched fisher. Go get the correct ones from server.
-                this.http.get(ABALOBI_USER_TRIPS).toPromise().then(function (response) {
+                this.http.get(ABALOBI_USER_TRIPS, OPTIONS).toPromise().then(function (response) {
                     this.localFisherTrips = response.json()['fisher-trips'] as Trip;
                     this.whosTrips = id;
 
@@ -54,7 +55,6 @@ export class FishersService {
         }.bind(this));
     }
 
-
     /**
      *
      * @returns {Promise<T>}
@@ -63,9 +63,10 @@ export class FishersService {
 
         return new Promise(function (resolve, reject) {
             const ABALOBI_USERS = 'http://197.85.186.65:8080/api/users';
+            const OPTIONS = this.getRequestOptions();
 
             if (this.localFishers === null || this.localFishers === undefined) {
-                this.http.get(ABALOBI_USERS).toPromise().then(function (response) {
+                this.http.get(ABALOBI_USERS, OPTIONS).toPromise().then(function (response) {
                     this.localFishers = response.json()['abalobi-users'] as Fisher;
 
                     resolve(this.localFishers);
@@ -78,6 +79,11 @@ export class FishersService {
         }.bind(this)); // NOTE: The bind `should` keep this as the parent object
     }
 
+    /**
+     *
+     * @param id
+     * @returns {Promise<T>}
+     */
     getFisher(id: string): Promise<Fisher> {
         return new Promise(function (resolve, reject) {
             this.getFishers().then(function (fishers) {
@@ -87,14 +93,21 @@ export class FishersService {
         }.bind(this));
     }
 
+    /**
+     *
+     * @returns {Promise<T>}
+     */
     getNewRegistrations(): Promise<Registration[]> {
 
         return new Promise(function (resolve, reject) {
             const QUERY = 'http://197.85.186.65:8080/api/registrations_new';
+            const OPTIONS = this.getRequestWithAuthOptions();
+
+            console.log(OPTIONS);
 
             if (this.localNewRegistrations === null || this.localNewRegistrations === undefined) {
                 // No trips saved in service, go fetch them
-                this.http.get(QUERY).toPromise().then(function (response) {
+                this.http.get(QUERY, OPTIONS).toPromise().then(function (response) {
                     this.localNewRegistrations = response.json()['registrations'] as Registration;
                     resolve(this.localNewRegistrations);
                 }.bind(this));
@@ -106,31 +119,79 @@ export class FishersService {
         }.bind(this));
     }
 
+    /**
+     *
+     * @param input
+     * @returns {Promise<T>}
+     */
     sendSMS(input): Promise<string> {
 
         return new Promise(function (resolve, reject) {
             const postURL = 'http://197.85.186.65:8080/api/sms';
+            // console.log('Auth: \n' + JSON.stringify(HEADERS, null, 4));
+            const headers = new Headers({'Authorization' : 'Bearer ' + localStorage.getItem('id_token')});
+            const body = {
+                toNumber: input.toNumber,
+                messageBody: input.messageBody,
+                timeStamp: (new Date())
+            };
 
             const options = new RequestOptions({
-                body: {
-                    toNumber: input.toNumber,
-                    messageBody: input.messageBody,
-                    timeStamp: (new Date())
-                }
+                headers: headers
             });
 
-            this.http.post(postURL, options).toPromise().then(function (response) {
+            // options.headers = new Headers({'Authorization': 'Bearer ' + localStorage.getItem('id_token')});
+
+            console.log('Request: ' + JSON.stringify(options, null, 4));
+
+            this.http.post(postURL, body, options).toPromise().then(function (response) {
                 // this.localNewRegistrations = response.json()['registrations'] as Registration;
                 // console.log(JSON.stringify(response.json(), null, 4));
                 // resolve(this.localNewRegistrations);
                 resolve(response.json());
-            }.bind(this)).catch((error) => {
+            }.bind(this)).catch(error => {
                 console.log('Error occurred while sending sms');
                 console.log('ERROR: ' + error);
                 resolve({message: 'Your message failed to send!'});
             });
-
         }.bind(this));
+    }
+
+    /**
+     *
+     * @returns {RequestOptions}
+     */
+    getRequestOptions(): RequestOptions {
+        // const TOKEN = localStorage.getItem('id_token');
+        // console.log("ACCESS TOKEN: " + localStorage.getItem('access_token'));
+        // console.log("ID TOKEN: " + localStorage.getItem('id_token'));
+
+        const HEADERS = new Headers();
+        // HEADERS.append('Authorization', btoa(TOKEN));
+
+
+        return new RequestOptions({headers: HEADERS});
+    }
+
+    getRequestWithAuthOptions(sentBody): RequestOptions {
+        const TOKEN = localStorage.getItem('id_token');
+        console.log('ACCESS TOKEN: ' + localStorage.getItem('access_token'));
+        console.log('ID TOKEN: ' + localStorage.getItem('id_token'));
+
+        const HEADERS = new Headers();
+        HEADERS.append('Authorization', 'Bearer ' + localStorage.getItem('id_token'));
+
+        console.log('Auth: \n' + JSON.stringify(HEADERS, null, 4));
+
+        let finalRequest;
+
+        if (sentBody) {
+            finalRequest = new RequestOptions({headers: HEADERS, body: sentBody});
+        } else {
+            finalRequest = new RequestOptions({headers: HEADERS});
+        }
+
+        return finalRequest;
     }
 }
 /*
