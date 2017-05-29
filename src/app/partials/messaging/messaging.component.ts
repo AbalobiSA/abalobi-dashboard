@@ -38,7 +38,7 @@ export class MessagingComponent implements OnInit {
             toNumber: this.cellnum,
             messageBody: this.messageBody
         }).then(response => {
-            console.log('RESPONSE: ' + response);
+            console.log('RESPONSE: ' + JSON.stringify(response, null, 4));
             alert(JSON.parse(JSON.stringify(response)).message);
         });
     }

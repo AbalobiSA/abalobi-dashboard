@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
-import { RequestOptions } from '@angular/http';
+import { RequestOptions, Request, RequestMethod } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -101,7 +101,7 @@ export class FishersService {
 
         return new Promise(function (resolve, reject) {
             const QUERY = 'http://197.85.186.65:8080/api/registrations_new';
-            const OPTIONS = this.getRequestOptions();
+            const OPTIONS = this.getRequestWithAuthOptions();
 
             console.log(OPTIONS);
 
@@ -128,16 +128,23 @@ export class FishersService {
 
         return new Promise(function (resolve, reject) {
             const postURL = 'http://197.85.186.65:8080/api/sms';
+            // console.log('Auth: \n' + JSON.stringify(HEADERS, null, 4));
+            const headers = new Headers({'Authorization' : 'Bearer ' + localStorage.getItem('id_token')});
+            const body = {
+                toNumber: input.toNumber,
+                messageBody: input.messageBody,
+                timeStamp: (new Date())
+            };
 
             const options = new RequestOptions({
-                body: {
-                    toNumber: input.toNumber,
-                    messageBody: input.messageBody,
-                    timeStamp: (new Date())
-                }
+                headers: headers
             });
 
-            this.http.post(postURL, options).toPromise().then(function (response) {
+            // options.headers = new Headers({'Authorization': 'Bearer ' + localStorage.getItem('id_token')});
+
+            console.log('Request: ' + JSON.stringify(options, null, 4));
+
+            this.http.post(postURL, body, options).toPromise().then(function (response) {
                 // this.localNewRegistrations = response.json()['registrations'] as Registration;
                 // console.log(JSON.stringify(response.json(), null, 4));
                 // resolve(this.localNewRegistrations);
@@ -166,16 +173,25 @@ export class FishersService {
         return new RequestOptions({headers: HEADERS});
     }
 
-    getRequestWithAuthOptions(): RequestOptions {
+    getRequestWithAuthOptions(sentBody): RequestOptions {
         const TOKEN = localStorage.getItem('id_token');
-        console.log("ACCESS TOKEN: " + localStorage.getItem('access_token'));
-        console.log("ID TOKEN: " + localStorage.getItem('id_token'));
+        console.log('ACCESS TOKEN: ' + localStorage.getItem('access_token'));
+        console.log('ID TOKEN: ' + localStorage.getItem('id_token'));
 
         const HEADERS = new Headers();
-        HEADERS.append('Authorization', btoa(TOKEN));
+        HEADERS.append('Authorization', 'Bearer ' + localStorage.getItem('id_token'));
 
+        console.log('Auth: \n' + JSON.stringify(HEADERS, null, 4));
 
-        return new RequestOptions({headers: HEADERS});
+        let finalRequest;
+
+        if (sentBody) {
+            finalRequest = new RequestOptions({headers: HEADERS, body: sentBody});
+        } else {
+            finalRequest = new RequestOptions({headers: HEADERS});
+        }
+
+        return finalRequest;
     }
 }
 /*
