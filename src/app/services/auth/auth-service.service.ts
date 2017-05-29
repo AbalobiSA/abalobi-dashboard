@@ -13,7 +13,8 @@ export class AuthService {
         domain: 'app56729554.eu.auth0.com',
         responseType: 'token id_token',
         audience: 'https://app56729554.eu.auth0.com/userinfo',
-        redirectUri: 'http://localhost:4200/home',
+        // redirectUri: 'http://localhost:4200/home',
+        redirectUri: 'http://abalobi-dashboard-ng2.herokuapp.com/home',
         scope: 'openid'
     });
 
