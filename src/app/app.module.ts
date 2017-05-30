@@ -25,6 +25,7 @@ import { FisherTripsComponent } from './partials/fisher-trips/fisher-trips.compo
 import { CommunitiesComponent } from './components/communities/communities.component';
 import { CommunitiesListComponent } from './components/communities-list/communities-list.component';
 import { AuthService } from './services/auth/auth-service.service';
+import { DeveloperSettingsService } from './services/settings/developer-settings.service';
 
 import { KeysPipe } from './pipes/key-pipe';
 import { MessagingComponent } from './partials/messaging/messaging.component';
@@ -66,7 +67,7 @@ import { FisherBioComponent } from './partials/fisher-bio/fisher-bio.component';
         Angular2FontAwesomeModule,
         Ng2CompleterModule
     ],
-    providers: [FishersService, AuthService],
+    providers: [FishersService, AuthService, DeveloperSettingsService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

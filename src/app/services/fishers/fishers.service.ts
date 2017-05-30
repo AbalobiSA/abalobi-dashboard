@@ -7,6 +7,7 @@ import 'rxjs/add/operator/toPromise';
 import { Fisher } from '../../objects/fisher';
 import { Registration } from '../../objects/registration';
 import { Trip } from '../../objects/trip';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class FishersService {
@@ -16,6 +17,8 @@ export class FishersService {
     private whosTrips = '';
     private localFisherTrips: Trip[] = null;
     private localNewRegistrations: Registration[] = null;
+
+    private BASE_URL = environment.API_URL;
 
     constructor(private http: Http) {
 
@@ -28,7 +31,7 @@ export class FishersService {
     getFisherTrips(id: string): Promise<Trip[]> {
 
         return new Promise(function (resolve, reject) {
-            const ABALOBI_USER_TRIPS = `http://197.85.186.65:8080/api/users/${String(id)}/trips`;
+            const ABALOBI_USER_TRIPS = this.BASE_URL + `/api/users/${String(id)}/trips`;
             const OPTIONS = this.getRequestOptions();
 
             if (this.localFisherTrips === null || this.localFisherTrips === undefined) {
@@ -62,7 +65,7 @@ export class FishersService {
     getFishers(): Promise<Fisher[]> {
 
         return new Promise(function (resolve, reject) {
-            const ABALOBI_USERS = 'http://197.85.186.65:8080/api/users';
+            const ABALOBI_USERS = this.BASE_URL + '/api/users';
             const OPTIONS = this.getRequestOptions();
 
             if (this.localFishers === null || this.localFishers === undefined) {
@@ -100,7 +103,7 @@ export class FishersService {
     getNewRegistrations(): Promise<Registration[]> {
 
         return new Promise(function (resolve, reject) {
-            const QUERY = 'http://197.85.186.65:8080/api/registrations_new';
+            const QUERY = this.BASE_URL + '/api/registrations_new';
             const OPTIONS = this.getRequestWithAuthOptions();
 
             console.log(OPTIONS);
@@ -127,7 +130,7 @@ export class FishersService {
     sendSMS(input): Promise<string> {
 
         return new Promise(function (resolve, reject) {
-            const postURL = 'http://197.85.186.65:8080/api/sms';
+            const postURL = this.BASE_URL + '/api/sms';
             // console.log('Auth: \n' + JSON.stringify(HEADERS, null, 4));
             const headers = new Headers({'Authorization' : 'Bearer ' + localStorage.getItem('id_token')});
             const body = {
