@@ -13,5 +13,6 @@ export class Registration {
     AA_has_been_processed__c: string;
     usertype__c: string;
     LastModifiedDate: string;
+    AA_admin_comments__c: string;
 
 }
