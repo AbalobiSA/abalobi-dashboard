@@ -11,12 +11,9 @@ export class FisherBlockComponent implements OnInit {
 
     @Input() fisher: Fisher;
 
-
-
     constructor() { }
 
-    ngOnInit() {
-    }
+    ngOnInit() {}
 
 
     private processName(input): string {
