@@ -41,6 +41,8 @@ export class CommunityFishersComponent implements OnInit {
     }
 
     navigateToFisher(id): void {
-        this.router.navigateByUrl(`/search/fisher/${id}/trips`);
+        this.router.navigateByUrl(`/search/fisher/${id}/trips`).
+        then(() => console.log(`Navigated to /search/fisher/${id}/trips`)).
+        catch(() => console.log(`Could not navigate to /search/fisher/${id}/trips`));
     }
 }

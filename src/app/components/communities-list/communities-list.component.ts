@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
 
 import { FishersService } from '../../services/fishers/fishers.service';
 
@@ -14,7 +15,8 @@ export class CommunitiesListComponent implements OnInit {
 
     communities = {};
 
-    constructor(private service: FishersService) {
+    constructor(private service: FishersService,
+                private router: Router) {
     }
 
     ngOnInit() {
@@ -37,6 +39,12 @@ export class CommunitiesListComponent implements OnInit {
             this.error = true;
             this.isLoading = false;
         });
+    }
+
+    showFishers(id): void {
+        this.router.navigateByUrl(`/communities/${id}/fishers`).
+        then(() => console.log(`Navigated to /communities/${id}/fishers`)).
+        catch(() => console.log(`Could not navigate to /communities/${id}/fishers`));
     }
 
 }
