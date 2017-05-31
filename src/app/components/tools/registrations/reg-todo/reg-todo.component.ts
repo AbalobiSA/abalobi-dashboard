@@ -13,6 +13,7 @@ import {Registration} from '../../../../objects/registration';
 export class RegTodoComponent implements OnInit {
     registrations: Registration[] = null;
     currentComment: Registration = null;
+    commentLoading: boolean = false;
 
     constructor(private http: Http,
                 private service: FishersService) {
@@ -37,7 +38,20 @@ export class RegTodoComponent implements OnInit {
     }
 
     commentSaveChanges(): void {
-        this.currentComment = null;
+        this.commentLoading = true;
+        this.service.updateRegistration(this.currentComment).then(response => {
+
+            console.log(response);
+            console.log(JSON.stringify(JSON.parse(JSON.stringify(response)), null, 4));
+
+            if (JSON.parse(JSON.stringify(response)).statusCode === 200) {
+                alert('Updated Successfully!');
+                this.commentLoading = false;
+            } else {
+                alert('Update failed!');
+                this.commentLoading = false;
+            }
+        });
     }
 
     commentCancel(): void {

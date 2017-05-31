@@ -65,9 +65,10 @@
                     <!--&lt;!&ndash;<a href="https://eu5.salesforce.com/{{i.Id}}" target="_blank">&ndash;&gt;-->
                     <!--<button class="btn btn-default btn-danger"><fa name="envelope"></fa>Send SMS</button>-->
                     <!--&lt;!&ndash;</a>&ndash;&gt;-->
-                <!--</td>-->
-                <td *ngIf="i.AA_admin_comments__c">
-                    <button class="btn btn-default btn-danger" (click)="showComment(i)"><fa name="comment"></fa>View Comments</button>
+                <!--</td> test-->
+                <td>
+                    <button class="btn btn-default btn-default" (click)="showComment(i)">Comments</button>
+                    &nbsp;<fa *ngIf="i.AA_admin_comments__c" name="comment"></fa>
                 </td>
             </tr>
             </tbody>
@@ -100,10 +101,19 @@
 
             <!--<div class="cs-spacer"></div>-->
 
-            <button class="btn btn-default" (click)="commentSaveChanges(currentComment)">Save Changes</button>
-            <button class="btn btn-default" (click)="commentCancel()">Cancel</button>
+            <button [disabled]="commentLoading === true" class="btn btn-default" (click)="commentSaveChanges(currentComment)">Save Changes</button>
+            <button [disabled]="commentLoading === true" class="btn btn-default" (click)="commentCancel()">Cancel</button>
+
+            <div id="commentLoadingOverlay" *ngIf="commentLoading === true">
+                <div class="text-center vertical-center-component">
+                    <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                        <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+                    </svg>
+                </div>
+            </div>
+            <div *ngIf="commentLoading === true">
+
+            </div>
         </div>
     </div>
-
-
 </div>

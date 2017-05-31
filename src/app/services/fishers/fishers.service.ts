@@ -1,13 +1,13 @@
-import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
-import { RequestOptions, Request, RequestMethod } from '@angular/http';
+import {Injectable} from '@angular/core';
+import {Http, Headers} from '@angular/http';
+import {RequestOptions, Request, RequestMethod} from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
-import { Fisher } from '../../objects/fisher';
-import { Registration } from '../../objects/registration';
-import { Trip } from '../../objects/trip';
-import { environment } from '../../../environments/environment';
+import {Fisher} from '../../objects/fisher';
+import {Registration} from '../../objects/registration';
+import {Trip} from '../../objects/trip';
+import {environment} from '../../../environments/environment';
 
 @Injectable()
 export class FishersService {
@@ -91,8 +91,8 @@ export class FishersService {
     getFisher(id: string): Promise<Fisher> {
         return new Promise(function (resolve, reject) {
             this.getFishers().then(function (fishers) {
-               const f = fishers.filter(item => item.Id === id)[0];
-               resolve(f);
+                const f = fishers.filter(item => item.Id === id)[0];
+                resolve(f);
             }).catch(() => reject());
         }.bind(this));
     }
@@ -155,7 +155,7 @@ export class FishersService {
         return new Promise(function (resolve, reject) {
             const postURL = this.BASE_URL + '/api/sms';
             // console.log('Auth: \n' + JSON.stringify(HEADERS, null, 4));
-            const headers = new Headers({'Authorization' : 'Bearer ' + localStorage.getItem('id_token')});
+            const headers = new Headers({'Authorization': 'Bearer ' + localStorage.getItem('id_token')});
             const body = {
                 toNumber: input.toNumber,
                 messageBody: input.messageBody,
@@ -179,6 +179,37 @@ export class FishersService {
                 console.log('Error occurred while sending sms');
                 console.log('ERROR: ' + error);
                 resolve({message: 'Your message failed to send!'});
+            });
+        }.bind(this));
+    }
+
+    updateRegistration(reg): Promise<any> {
+        return new Promise(function (resolve, reject) {
+            const postURL = this.BASE_URL + '/api/registrations_update';
+            // console.log('Auth: \n' + JSON.stringify(HEADERS, null, 4));
+            const headers = new Headers({'Authorization': 'Bearer ' + localStorage.getItem('id_token')});
+            const body = {
+                'Id': reg.Id,
+                'AA_admin_comments__c': reg.AA_admin_comments__c
+            };
+
+            const options = new RequestOptions({
+                headers: headers
+            });
+
+            // options.headers = new Headers({'Authorization': 'Bearer ' + localStorage.getItem('id_token')});
+
+            // console.log('Request: ' + JSON.stringify(options, null, 4));
+
+            this.http.post(postURL, body, options).toPromise().then(function (response) {
+                // this.localNewRegistrations = response.json()['registrations'] as Registration;
+                // console.log(JSON.stringify(response.json(), null, 4));
+                // resolve(this.localNewRegistrations);
+                resolve({statusCode: 200});
+            }.bind(this)).catch(error => {
+                console.log('Error occurred while updating registration');
+                console.log('ERROR: ' + error);
+                resolve({message: 'Your update failed!'});
             });
         }.bind(this));
     }
