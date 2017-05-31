@@ -12,5 +12,6 @@ export class Registration {
     AA_have_sent_SMS__c: string;
     AA_has_been_processed__c: string;
     usertype__c: string;
+    LastModifiedDate: string;
 
 }

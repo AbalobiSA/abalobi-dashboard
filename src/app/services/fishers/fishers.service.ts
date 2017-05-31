@@ -17,6 +17,7 @@ export class FishersService {
     private whosTrips = '';
     private localFisherTrips: Trip[] = null;
     private localNewRegistrations: Registration[] = null;
+    private localRecentRegistrations: Registration[] = null;
 
     private BASE_URL = environment.API_URL;
 
@@ -118,6 +119,28 @@ export class FishersService {
             } else {
                 // The trips saved in service are those of the fisher currently being searched for. Just return local saved trips
                 resolve(this.localNewRegistrations);
+            }
+        }.bind(this));
+    }
+
+    getRecentRegistrations(): Promise<Registration[]> {
+
+        return new Promise(function (resolve, reject) {
+            const QUERY = this.BASE_URL + '/api/registrations_recent';
+            const OPTIONS = this.getRequestWithAuthOptions();
+
+            console.log(OPTIONS);
+
+            if (this.localRecentRegistrations === null || this.localRecentRegistrations === undefined) {
+                // No trips saved in service, go fetch them
+                this.http.get(QUERY, OPTIONS).toPromise().then(function (response) {
+                    this.localRecentRegistrations = response.json()['registrations'] as Registration;
+                    resolve(this.localRecentRegistrations);
+                }.bind(this));
+
+            } else {
+                // The trips saved in service are those of the fisher currently being searched for. Just return local saved trips
+                resolve(this.localRecentRegistrations);
             }
         }.bind(this));
     }

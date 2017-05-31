@@ -33,6 +33,8 @@ import { ToolsOverviewComponent } from './partials/tools-overview/tools-overview
 import { RegistrationsComponent } from './components/tools/registrations/registrations.component';
 import { OdkComponent } from './partials/odk/odk.component';
 import { FisherBioComponent } from './partials/fisher-bio/fisher-bio.component';
+import { RegTodoComponent } from './components/tools/registrations/reg-todo/reg-todo.component';
+import { RegRecentComponent } from './components/tools/registrations/reg-recent/reg-recent.component';
 
 @NgModule({
     declarations: [
@@ -57,7 +59,11 @@ import { FisherBioComponent } from './partials/fisher-bio/fisher-bio.component';
 
         OdkComponent,
 
-        FisherBioComponent
+        FisherBioComponent,
+
+        RegTodoComponent,
+
+        RegRecentComponent
     ],
     imports: [
         BrowserModule,

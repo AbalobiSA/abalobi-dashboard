@@ -2,17 +2,15 @@ import {Component, OnInit} from '@angular/core';
 import {Http} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
-import {FishersService} from '../../../services/fishers/fishers.service';
-import {Registration} from '../../../objects/registration';
+import {FishersService} from '../../../../services/fishers/fishers.service';
+import {Registration} from '../../../../objects/registration';
 
 @Component({
-    selector: 'app-registrations',
-    templateUrl: './registrations.component.html',
-    styleUrls: ['./registrations.component.scss']
+    selector: 'app-reg-todo',
+    templateUrl: './reg-todo.component.html',
+    styleUrls: ['./reg-todo.component.scss']
 })
-
-export class RegistrationsComponent implements OnInit {
-
+export class RegTodoComponent implements OnInit {
     registrations: Registration[] = null;
 
     constructor(private http: Http,
@@ -30,5 +28,4 @@ export class RegistrationsComponent implements OnInit {
         const parsedDate = (new Date(Date.parse(input)));
         return parsedDate.toDateString();
     }
-
 }

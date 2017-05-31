@@ -1,0 +1,71 @@
+<div>
+    <div *ngIf="!registrations">
+        <div class="text-center">
+            <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+            </svg>
+        </div>
+    </div>
+    <div>
+        <table class="table cs-darktable" *ngIf="registrations !== null">
+            <thead>
+            <tr>
+                <th>
+                    Date Registered
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Surname
+                </th>
+                <th>
+                    Community
+                </th>
+                <th>
+                    User Type
+                </th>
+                <th>
+                    Cell Number
+                </th>
+                <th>
+                    <!--Placeholder-->
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let i of registrations">
+                <td>
+                    {{beautifyDate(i.CreatedDate)}}
+                </td>
+                <td>
+                    {{i.name__c}}
+                </td>
+                <td>
+                    {{i.surname__c}}
+                </td>
+                <td>
+                    {{i.home_community__c}}
+                </td>
+                <td>
+                    {{i.usertype__c}}
+                </td>
+                <td>
+                    {{i.cell_num_personal__c}}
+                </td>
+                <td>
+                    <a href="https://eu5.salesforce.com/{{i.Id}}" target="_blank">
+                        <button class="btn btn-default btn-primary"><fa name="address-book"></fa>Process Registration</button>
+                    </a>
+                </td>
+                <!--<td>-->
+                    <!--&lt;!&ndash;<a href="https://eu5.salesforce.com/{{i.Id}}" target="_blank">&ndash;&gt;-->
+                    <!--<button class="btn btn-default btn-danger"><fa name="envelope"></fa>Send SMS</button>-->
+                    <!--&lt;!&ndash;</a>&ndash;&gt;-->
+                <!--</td>-->
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
