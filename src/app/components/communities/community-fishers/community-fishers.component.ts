@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 
-import {Fisher} from '../../objects/fisher';
-import {FishersService} from '../../services/fishers/fishers.service';
+import {Fisher} from '../../../objects/fisher';
+import {FishersService} from '../../../services/fishers/fishers.service';
 
 @Component({
     selector: 'app-community-fishers',

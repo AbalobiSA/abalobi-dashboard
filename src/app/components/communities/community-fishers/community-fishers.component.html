@@ -1,0 +1,46 @@
+<div *ngIf="fishers" class="container">
+
+    <h1 class="text-center">
+        Fishers for <span style="color: cornflowerblue;">{{community}}</span>
+    </h1>
+
+    <div class="spacer"></div>
+
+    <div class="table-responsive">
+        <!-- All the trips -->
+        <table class="table" style="width:100%">
+            <thead>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Cell Number
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let fisher of fishers">
+                    <td>
+                        {{fisher.FirstName}} {{fisher.LastName}}
+                    </td>
+                    <td>
+                        {{fisher.contact_mobile_num__c}}
+                    </td>
+                    <td>
+                        <button class="btn btn-default btn-primary" (click)="navigateToFisher(fisher.Id)">View Fisher</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div *ngIf="!fishers" class="text-center">
+    <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+        <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+    </svg>
+</div>
+
