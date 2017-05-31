@@ -57,8 +57,8 @@ const routes: Routes = [
         component: CommunitiesComponent,
         children: [
             {path: '', redirectTo: 'list', pathMatch: 'full'},
-            {path: 'list', component: CommunitiesListComponent}
-        //     {path: ':id/fishers', component: CommunityFishersComponent}
+            {path: 'list', component: CommunitiesListComponent},
+            {path: ':id/fishers', component: CommunityFishersComponent}
         ]
     }
 ];
