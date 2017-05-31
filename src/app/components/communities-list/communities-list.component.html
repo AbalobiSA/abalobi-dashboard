@@ -9,7 +9,7 @@
                 <th><--></th>
             </tr>
             <tr *ngFor="let key of (this.communities | keys)">
-                <th>{{key}}</th>
+                <th><a [routerLink]="['../', key, 'fishers']">{{key}}</a></th>
                 <th>{{this.communities[key]}}</th>
                 <th>-_-</th>
             </tr>

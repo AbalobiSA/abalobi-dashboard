@@ -18,6 +18,7 @@ import {OdkComponent} from './partials/odk/odk.component';
 import {FisherBioComponent} from './partials/fisher-bio/fisher-bio.component';
 import {RegTodoComponent} from './components/tools/registrations/reg-todo/reg-todo.component';
 import {RegRecentComponent} from './components/tools/registrations/reg-recent/reg-recent.component';
+import {CommunityFishersComponent} from "./partials/community-fishers/community-fishers.component";
 
 
 const routes: Routes = [
@@ -56,7 +57,8 @@ const routes: Routes = [
         component: CommunitiesComponent,
         children: [
             {path: '', redirectTo: 'list', pathMatch: 'full'},
-            {path: 'list', component: CommunitiesListComponent}
+            {path: 'list', component: CommunitiesListComponent},
+            {path: ':id/fishers', component: CommunityFishersComponent}
         ]
     }
 ];

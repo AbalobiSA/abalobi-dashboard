@@ -35,6 +35,7 @@ import { OdkComponent } from './partials/odk/odk.component';
 import { FisherBioComponent } from './partials/fisher-bio/fisher-bio.component';
 import { RegTodoComponent } from './components/tools/registrations/reg-todo/reg-todo.component';
 import { RegRecentComponent } from './components/tools/registrations/reg-recent/reg-recent.component';
+import { CommunityFishersComponent } from './partials/community-fishers/community-fishers.component';
 
 @NgModule({
     declarations: [
@@ -63,7 +64,9 @@ import { RegRecentComponent } from './components/tools/registrations/reg-recent/
 
         RegTodoComponent,
 
-        RegRecentComponent
+        RegRecentComponent,
+
+        CommunityFishersComponent
     ],
     imports: [
         BrowserModule,
