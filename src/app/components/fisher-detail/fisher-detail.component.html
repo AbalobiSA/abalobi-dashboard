@@ -27,6 +27,8 @@
                         <p>
                             Community: {{fisher.primary_community__c}}
                         </p>
+                        <span>Last Trip Status:&nbsp;</span>
+                        <div class="indicator" [ngClass]="{green: isGreen, orange: isOrange, red: isRed, black: isBlack}"></div>
                     </div>
                 </div>
 

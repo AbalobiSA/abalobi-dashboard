@@ -1,3 +1,26 @@
+.indicator {
+    z-index: 99999;
+    width: 15px;
+    height: 15px;
+    float: right;
+    margin-left: 10px;
+    border-radius: 50%;
+}
+
+.indicator.green {
+    background-color: green;
+}
+.indicator.orange {
+    background-color: orange;
+}
+.indicator.red {
+    background-color: red;
+}
+.indicator.black {
+    background-color: black;
+}
+
+
 .cs-column-image {
     display: block;
     max-width: 100%;

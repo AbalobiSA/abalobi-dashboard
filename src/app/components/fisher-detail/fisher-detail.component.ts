@@ -14,6 +14,11 @@ export class FisherDetailComponent implements OnInit {
 
     fisher: Fisher = null;
 
+    isGreen = false; // Last week
+    isOrange = false; // last month
+    isRed = false; // has trip
+    isBlack = false; // no trips
+
     error = false;
 
     constructor(private route: ActivatedRoute,
@@ -31,7 +36,45 @@ export class FisherDetailComponent implements OnInit {
             } else {
                 const id = params['id'];
 
-                this.service.getFisher(id).then(f => this.fisher = f).catch(() => this.error = true);
+                this.service.getFisher(id).then(f => {
+                    this.fisher = f;
+
+                    this.service.getFisherTrips(this.fisher.Id).then(trips => {
+                        const week = trips.filter(trip => {
+                            const d1 = new Date(trip.trip_date__c);
+                            const d2 = new Date();
+
+                            return ((d2.getTime() - d1.getTime()) / (1000.0 * 60.0 * 60.0 * 24.0)) <= 7.0;
+                        });
+
+                        if (week.length > 0) {
+                            this.isGreen = true;
+                            return;
+                        }
+
+                        const month = trips.filter(trip => {
+                            const d1 = new Date(trip.trip_date__c);
+                            const d2 = new Date();
+
+                            return ((d2.getTime() - d1.getTime()) / (1000.0 * 60.0 * 60.0 * 24.0)) <= 28.0;
+                        });
+
+                        if (month.length > 0) {
+                            this.isOrange = true;
+                            return;
+                        }
+
+                        if (trips.length > 0) {
+                            this.isRed = true;
+                            return;
+                        }
+
+                        if (trips.length === 0) {
+                            this.isBlack = true;
+                            return;
+                        }
+                    });
+                }).catch(() => this.error = true);
             }
         });
     }
