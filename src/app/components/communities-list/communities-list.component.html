@@ -13,9 +13,16 @@
 
             <tbody>
                 <tr *ngFor="let key of (this.communities | keys)">
-                    <th><a [routerLink]="['../', key, 'fishers']">{{key}}</a></th>
-                    <th>{{this.communities[key]}}</th>
-                    <th>-_-</th>
+                    <th>
+                        <!--<a [routerLink]="['../', key, 'fishers']">{{key}}</a>-->
+                        {{key}}
+                    </th>
+                    <th>
+                        {{this.communities[key]}}
+                    </th>
+                    <th>
+                        -_-
+                    </th>
                 </tr>
             </tbody>
 
