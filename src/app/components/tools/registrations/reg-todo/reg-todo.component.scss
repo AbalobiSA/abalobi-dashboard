@@ -1,0 +1,18 @@
+/*============================================================================
+    Registrations To-do component
+ ============================================================================*/
+#commentFullscreenOverlay{
+    position: fixed;
+    background-color: rgba(0,0,0,0.5);
+    top: 50px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+#commentPopup{
+    border: 1px solid darkgrey;
+    border-radius: 5px;
+    padding: 15px;
+    background-color: white;
+}

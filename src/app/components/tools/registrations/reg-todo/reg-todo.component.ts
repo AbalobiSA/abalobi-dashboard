@@ -12,6 +12,7 @@ import {Registration} from '../../../../objects/registration';
 })
 export class RegTodoComponent implements OnInit {
     registrations: Registration[] = null;
+    currentComment: Registration = null;
 
     constructor(private http: Http,
                 private service: FishersService) {
@@ -27,5 +28,19 @@ export class RegTodoComponent implements OnInit {
     beautifyDate(input): string {
         const parsedDate = (new Date(Date.parse(input)));
         return parsedDate.toDateString();
+    }
+
+    showComment(inputRegistration): void {
+        console.log(inputRegistration.Id);
+        // alert('Showing : ' + inputRegistration.Id);
+        this.currentComment = inputRegistration;
+    }
+
+    commentSaveChanges(): void {
+        this.currentComment = null;
+    }
+
+    commentCancel(): void {
+        this.currentComment = null;
     }
 }

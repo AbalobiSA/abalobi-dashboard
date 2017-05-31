@@ -29,7 +29,10 @@
                     Cell Number
                 </th>
                 <th>
-                    <!--Placeholder-->
+                    Process
+                </th>
+                <th>
+                    Comments
                 </th>
             </tr>
             </thead>
@@ -63,9 +66,44 @@
                     <!--<button class="btn btn-default btn-danger"><fa name="envelope"></fa>Send SMS</button>-->
                     <!--&lt;!&ndash;</a>&ndash;&gt;-->
                 <!--</td>-->
+                <td *ngIf="i.AA_admin_comments__c">
+                    <button class="btn btn-default btn-danger" (click)="showComment(i)"><fa name="comment"></fa>View Comments</button>
+                </td>
             </tr>
             </tbody>
         </table>
     </div>
 </div>
 
+<div id="commentFullscreenOverlay" *ngIf="currentComment !== null">
+    <div class="cs-spacer"></div>
+    <div class="container">
+        <div id="commentPopup" *ngIf="currentComment !== null">
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon" id="sizing-addon1">Name</span>
+                <input type="text" class="form-control" disabled placeholder="Registrant Name" aria-describedby="sizing-addon1" value="{{currentComment.name__c}}&nbsp;{{currentComment.surname__c}}">
+            </div>
+
+            <div class="cs-spacer"></div>
+
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon" id="sizing-addon1">SalesForce ID</span>
+                <input type="text" class="form-control" disabled placeholder="00FF2200331123" aria-describedby="sizing-addon1" value="{{currentComment.Id}}">
+            </div>
+
+            <div class="cs-spacer"></div>
+
+            <div class="form-group">
+                <label for="comment">Comment:</label>
+                <textarea class="form-control" rows="5" id="comment" [(ngModel)]="currentComment.AA_admin_comments__c"></textarea>
+            </div>
+
+            <!--<div class="cs-spacer"></div>-->
+
+            <button class="btn btn-default" (click)="commentSaveChanges(currentComment)">Save Changes</button>
+            <button class="btn btn-default" (click)="commentCancel()">Cancel</button>
+        </div>
+    </div>
+
+
+</div>
