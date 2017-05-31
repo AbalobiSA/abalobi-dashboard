@@ -28,9 +28,9 @@ import { AuthService } from './services/auth/auth-service.service';
 import { DeveloperSettingsService } from './services/settings/developer-settings.service';
 
 import { KeysPipe } from './pipes/key-pipe';
-import { MessagingComponent } from './partials/messaging/messaging.component';
+import { MessagingComponent } from './components/tools/messaging/messaging.component';
 import { ToolsOverviewComponent } from './partials/tools-overview/tools-overview.component';
-import { RegistrationsComponent } from './partials/registrations/registrations.component';
+import { RegistrationsComponent } from './components/tools/registrations/registrations.component';
 import { OdkComponent } from './partials/odk/odk.component';
 import { FisherBioComponent } from './partials/fisher-bio/fisher-bio.component';
 

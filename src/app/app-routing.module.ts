@@ -11,9 +11,9 @@ import { FisherDetailComponent } from './components/fisher-detail/fisher-detail.
 import { FisherTripsComponent } from './partials/fisher-trips/fisher-trips.component';
 import { CommunitiesComponent } from './components/communities/communities.component';
 import { CommunitiesListComponent } from './components/communities-list/communities-list.component';
-import { MessagingComponent } from './partials/messaging/messaging.component';
+import { MessagingComponent } from './components/tools/messaging/messaging.component';
 import { ToolsOverviewComponent } from './partials/tools-overview/tools-overview.component';
-import { RegistrationsComponent } from './partials/registrations/registrations.component';
+import { RegistrationsComponent } from './components/tools/registrations/registrations.component';
 import {OdkComponent} from './partials/odk/odk.component';
 import {FisherBioComponent} from './partials/fisher-bio/fisher-bio.component';
 

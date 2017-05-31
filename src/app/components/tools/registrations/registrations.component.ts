@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
-import { FishersService } from '../../services/fishers/fishers.service';
-import { Registration } from '../../objects/registration';
+import { FishersService } from '../../../services/fishers/fishers.service';
+import { Registration } from '../../../objects/registration';
 
 @Component({
   selector: 'app-registrations',
