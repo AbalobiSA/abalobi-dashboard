@@ -26,7 +26,7 @@ export class CommunitiesStatsComponent implements OnInit {
     public barChartLegend = false;
     public barChartColors: any[] = [
         // Each entry in the array corresponds to a column in the graph
-        {backgroundColor: ['#e84351 ', '#434a54', '#3ebf9b', '#4d86dc', '#f3af37']}
+        {backgroundColor: ['#e84351', '#434a54', '#3ebf9b', '#4d86dc', '#f3af37']}
     ];
 
     public barChartData: any[] = [
