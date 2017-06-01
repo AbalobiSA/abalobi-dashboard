@@ -245,8 +245,13 @@ export class FishersService {
                headers: headers
            });
 
+
+           // TODO: Please make this section more readable
+           // - Carl
+
            if (startDate !== null && endDate !== null) {
-               URL += `/api/communities/filtered_trips?startDate=${startDate.getFullYear()}-${startDate.getMonth() + 1}-${startDate.getDate()}&endDate=${endDate.getFullYear()}-${endDate.getMonth() + 1}-${endDate.getDate()}`;
+               URL += `/api/communities/filtered_trips?startDate=`
+                   + `${startDate.getFullYear()}-${startDate.getMonth() + 1}-${startDate.getDate()}&endDate=${endDate.getFullYear()}-${endDate.getMonth() + 1}-${endDate.getDate()}`;
            } else if (startDate !== null) {
                URL += `/api/communities/filtered_trips?startDate=${startDate.getFullYear()}-${startDate.getMonth() + 1}-${startDate.getDate()}`;
            } else {
