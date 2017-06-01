@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 
-import {NotificationsService} from 'angular2-notifications/dist';
+// import {NotificationsService} from 'angular2-notifications/dist';
 
 import {FishersService} from '../../../services/fishers/fishers.service';
 
@@ -33,8 +33,9 @@ export class CommunitiesStatsComponent implements OnInit {
         {data: [], label: ''}
     ];
 
-    constructor(private service: FishersService,
-                private notiService: NotificationsService) {}
+    constructor(private service: FishersService
+                // private notiService: NotificationsService
+    ) {}
 
     ngOnInit() {
         this.service.getCommunitiesRecentTrips().then(items => {
@@ -51,16 +52,16 @@ export class CommunitiesStatsComponent implements OnInit {
     }
 
     showErrorNotification(message: string): void {
-        this.notiService.error(
-            'Error',
-            message,
-            {
-                timeOut: 5000,
-                showProgressBar: true,
-                pauseOnHover: false,
-                clickToClose: false
-            }
-        );
+        // this.notiService.error(
+        //     'Error',
+        //     message,
+        //     {
+        //         timeOut: 5000,
+        //         showProgressBar: true,
+        //         pauseOnHover: false,
+        //         clickToClose: false
+        //     }
+        // );
     }
 
     filter(): void {
