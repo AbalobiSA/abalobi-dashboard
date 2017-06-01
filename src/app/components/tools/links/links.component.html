@@ -1,0 +1,179 @@
+<h1>Useful links & Registration Guide</h1>
+
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            Useful Links
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+            <a href="https://eu5.salesforce.com/a0l/o" target="_blank">
+                • SalesForce Registrations Page
+            </a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="https://abalobi-fisher.appspot.com/Aggregate.html#management/forms///" target="_blank">
+                • ODK Aggregate - Form Upload
+            </a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="https://abalobi-fisher.appspot.com/Aggregate.html#admin/permission///" target="_blank">
+                • ODK Aggregate - User Upload & Permissions
+            </a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="https://github.com/AbalobiSA/Abalobi_docs/wiki" target="_blank">
+                • Abalobi Wiki
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<div class="cs-button-footer">
+    <button class="btn btn-default" (click)="toggleGuide()">
+        <span *ngIf="GUIDE_OPEN === false" > <fa name="arrow-right"></fa> Show Registration Guide</span>
+        <span *ngIf="GUIDE_OPEN === true" > <fa name="arrow-down"></fa> Hide Registration Guide</span>
+    </button>
+</div>
+
+<div id="ultimate-spacer">
+
+</div>
+<div id="guide" *ngIf="GUIDE_OPEN === true">
+
+    <h1 id="1createsfusers">1 - Create SF users  </h1>
+
+    <ol>
+        <li><a href="https://eu5.salesforce.com/a0l/o">Open Ablb_Registrations page</a></li>
+
+        <li>Click on the new Registration entry you want to action</li>
+
+        <li>Click on the button "Create New User". Ensure that the output shows successful user creation. Note any errors (e.g. boat or pwd problems)</li>
+    </ol>
+
+    <p>Repeat for all users before going on to next step</p>
+
+    <h1 id="21usenodeserverfornewmembers">2.1 - Use Node Server for new members</h1>
+
+    <p>Run <code>node index</code> in the registration directory, which will generate the required <code>newusers.csv</code></p>
+
+    <h1 id="22manuallyexportlistofregistrations">2.2 - Manually Export list of registrations </h1>
+
+    <p>Use <a href="https://workbench.developerforce.com/query.php">SF Workbench</a> or DataLoader to export the new registrations: <br />
+        (set the date as needed)</p>
+
+    <pre><code>SELECT AA_assigned_username__c, AA_assigned_abalobi_id__c, password__c,home_community__c FROM Ablb_Registration__c WHERE CreatedDate &gt; 2017-01-17T00:01:01+02:00
+</code></pre>
+
+    <p>Modify column headers to: </p>
+
+    <pre><code>Username
+FullName
+Password
+Community
+</code></pre>
+
+    <p>Delete any rows that don't need to be processed (duplicates or already processed)</p>
+
+    <p>Save as newusers.csv</p>
+
+    <h1 id="3updateodkformwithnewusers">3 - Update ODK form with new users: </h1>
+
+    <ul>
+        <li>Run "Download Fisher Forms" from the <a href="http://abalobi-dashboard-ng2.herokuapp.com/">Abalobi Dashboard</a>    </li>
+
+        <li>Extract the zip file - should have a form xml and a zip.  Check that List_Fishers.csv has some new fishers added. (Managers/Assistants won't show here)</li>
+    </ul>
+
+    <p>Log in to:
+        https://abalobi-fisher.appspot.com/Aggregate.html#management/forms///</p>
+
+    <blockquote>
+        <p>(Avoid going directly to the Submissions tab (https://abalobi-fisher.appspot.com/Aggregate.html) as it chows our free quota </p>
+    </blockquote>
+
+    <pre><code class="   language-  ">Click "Add New Form"
+Upload the xml Form Definition
+Upload the zip media files
+Click Upload Form. This may take a while.
+</code></pre>
+
+    <p>Once done, go back to the Forms List, click on the Title of the form and search for the second "version" string - check that it is as expected (starts with today's date)</p>
+
+    <h1 id="4addnewuserstoodkaggregate">4 - Add new users to ODK Aggregate  </h1>
+
+    <p>(if not already logged in) Log in to:
+        <a href="https://abalobi-fisher.appspot.com/Aggregate.html#admin/permission///">Abalobi ODK Permissions</a></p>
+
+    <p>Click "DOWNLOAD current UsersAndCapabilities.csv". Save file locally.
+        Make a copy of the file new_UsersAndCapabilities.csv</p>
+
+    <p>Copy newusers.csv into the bottom of new_UsersAndCapabilities.csv  (leave out the Community column)
+        Copy "ODK" into all new users
+        Copy "X" into all new users   (NB - not the Anonymous user)</p>
+
+    <p>NB: DON'T REMOVE any users from the list - this will delete them.</p>
+
+    <p>Save</p>
+
+    <p>On Aggregate, Click "UPLOAD UsersAndCapabilities.csv" and supply newusers.csv </p>
+
+    <h1 id="5setodkpasswords">5 - Set ODK passwords</h1>
+
+    <pre><code>MANUALLY:
+---------
+Click on Change Password on correct username (be careful of multiple users with similar names)
+Scroll upwards to find the pop-up, and copy and paste the correct password from newusers.csv
+Repeat for each registration
+
+WITH SCRIPT:
+------------
+LOG OUT OF SF before using scripts
+Use https://github.com/jovaee/ODK-Bot/  :
+    Set credentials in secrets.py
+    Rename newusers.csv to test.csv
+</code></pre>
+
+    <h1 id="6setsfpasswords">6 - Set SF passwords</h1>
+
+    <pre><code>MANUALLY:
+---------
+Open login.salesforce.com (can do this in private/incognito browser if you're currently logged in)
+Login using new username and pwd:000000
+Set new password as per  newusers.csv
+Set answer to secret question (town of birth) from Community column of newusers.csv
+Logout
+
+Login again using new username and new pwd
+Select "I don't want to register my mobile phone"
+
+WITH SCRIPT:
+------------
+LOG OUT OF SF before using scripts
+Use https://github.com/AbalobiSA/Salesforce-Bot :
+    Set credentials in secrets.py
+    Rename newusers.csv to test.csv
+</code></pre>
+
+    <h1 id="7smsusersthatregistrationiscomplete">7 - SMS users that registration is complete:</h1>
+
+    <pre><code>Open Ablb_Registrations page
+Click on the new Registration entry you want to action
+Click on the button "Send Username via SMS".  Note any errors on popup/
+
+Repeat for all users
+</code></pre>
+
+</div>
