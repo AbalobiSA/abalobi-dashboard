@@ -1,24 +1,19 @@
-<div>
-    <h2>Date Filter:</h2>
+<h2>Date Filter:</h2>
+<div class="input-group">
+
+    <span class="input-group-addon" id="basic-addon1">From Date</span>
+    <input [(ngModel)]="startDate" (ngModelChange)="filter()" class="form-control" type="date" aria-describedby="basic-addon1">
 </div>
 
-<div>
-    From Date:
-</div>
-<div>
-    <label style="width: 100%">
-        <input [(ngModel)]="startDate" (ngModelChange)="filter()" class="form-control" type="date" name="sday">
-    </label>
+<div class="spacer"></div>
+
+<div class="input-group">
+
+    <span class="input-group-addon" id="basic-addon2">To Date</span>
+    <input [(ngModel)]="endDate" (ngModelChange)="filter()" class="form-control" type="date" aria-describedby="basic-addon2">
 </div>
 
-<div>
-    To Date:
-</div>
-<div>
-    <label style="width: 100%">
-        <input [(ngModel)]="endDate" (ngModelChange)="filter()" class="form-control" type="date" name="eday">
-    </label>
-</div>
+<div class="spacer2"></div>
 
 <div *ngIf="showGraph">
     <div style="display: block">
