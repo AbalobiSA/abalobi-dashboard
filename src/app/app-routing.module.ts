@@ -14,11 +14,12 @@ import {CommunitiesListComponent} from './components/communities-list/communitie
 import {MessagingComponent} from './components/tools/messaging/messaging.component';
 import {ToolsOverviewComponent} from './partials/tools-overview/tools-overview.component';
 import {RegistrationsComponent} from './components/tools/registrations/registrations.component';
-import {OdkComponent} from './partials/odk/odk.component';
+import {OdkComponent} from './components/tools/odk/odk.component';
 import {FisherBioComponent} from './partials/fisher-bio/fisher-bio.component';
 import {RegTodoComponent} from './components/tools/registrations/reg-todo/reg-todo.component';
 import {RegRecentComponent} from './components/tools/registrations/reg-recent/reg-recent.component';
 import {CommunityFishersComponent} from './components/communities/community-fishers/community-fishers.component';
+import {LinksComponent} from './components/tools/links/links.component';
 
 
 const routes: Routes = [
@@ -42,7 +43,8 @@ const routes: Routes = [
                     { path: 'recent', component: RegRecentComponent }
                 ]
             },
-            { path: 'odk', component: OdkComponent }
+            { path: 'odk', component: OdkComponent },
+            { path: 'links', component: LinksComponent }
         ]
     },
     { path: 'search/fisher/:id', component: FisherDetailComponent,
