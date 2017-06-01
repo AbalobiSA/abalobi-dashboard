@@ -73,7 +73,7 @@ import { LinksComponent } from './components/tools/links/links.component';
 
         CommunityFishersComponent,
 
-        LinksComponent
+        LinksComponent,
         CommunityFishersComponent,
 
         CommunitiesStatsComponent
