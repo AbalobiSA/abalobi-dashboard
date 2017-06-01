@@ -20,6 +20,7 @@ import {RegTodoComponent} from './components/tools/registrations/reg-todo/reg-to
 import {RegRecentComponent} from './components/tools/registrations/reg-recent/reg-recent.component';
 import {CommunityFishersComponent} from './components/communities/community-fishers/community-fishers.component';
 import {LinksComponent} from './components/tools/links/links.component';
+import {CommunitiesStatsComponent} from './components/communities/communities-stats/communities-stats.component';
 
 
 const routes: Routes = [
@@ -60,6 +61,7 @@ const routes: Routes = [
         children: [
             {path: '', redirectTo: 'list', pathMatch: 'full'},
             {path: 'list', component: CommunitiesListComponent},
+            {path: 'stats', component: CommunitiesStatsComponent},
             {path: ':id/fishers', component: CommunityFishersComponent}
         ]
     }

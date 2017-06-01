@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -8,6 +9,8 @@ import { AppComponent } from './app.component';
 
 import { Angular2FontAwesomeModule } from 'angular2-font-awesome/angular2-font-awesome';
 import { Ng2CompleterModule } from 'ng2-completer';
+import { SimpleNotificationsModule } from 'angular2-notifications';
+import { ChartsModule } from 'ng2-charts';
 
 /*============================================================================
  Route Imports
@@ -36,6 +39,7 @@ import { FisherBioComponent } from './partials/fisher-bio/fisher-bio.component';
 import { RegTodoComponent } from './components/tools/registrations/reg-todo/reg-todo.component';
 import { RegRecentComponent } from './components/tools/registrations/reg-recent/reg-recent.component';
 import { CommunityFishersComponent } from './components/communities/community-fishers/community-fishers.component';
+import { CommunitiesStatsComponent } from './components/communities/communities-stats/communities-stats.component';
 import { LinksComponent } from './components/tools/links/links.component';
 
 @NgModule({
@@ -70,6 +74,9 @@ import { LinksComponent } from './components/tools/links/links.component';
         CommunityFishersComponent,
 
         LinksComponent
+        CommunityFishersComponent,
+
+        CommunitiesStatsComponent
     ],
     imports: [
         BrowserModule,
@@ -77,7 +84,12 @@ import { LinksComponent } from './components/tools/links/links.component';
         HttpModule,
         AppRoutingModule,
         Angular2FontAwesomeModule,
-        Ng2CompleterModule
+        Ng2CompleterModule,
+        ChartsModule,
+
+        // Animations need to be imported in to your project to use the library
+        BrowserAnimationsModule,
+        SimpleNotificationsModule.forRoot()
     ],
     providers: [FishersService, AuthService, DeveloperSettingsService],
     bootstrap: [AppComponent]

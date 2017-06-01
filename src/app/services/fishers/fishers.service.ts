@@ -216,6 +216,53 @@ export class FishersService {
 
     /**
      *
+     * @returns {Promise<T>}
+     */
+    getCommunitiesRecentTrips(): Promise<any> {
+        return new Promise(function (resolve, reject) {
+           const URL = this.BASE_URL + '/api/communities/recent_trips';
+           const headers = new Headers({'Authorization': 'Bearer ' + localStorage.getItem('id_token')});
+           const options = new RequestOptions({
+               headers: headers
+           });
+
+           this.http.get(URL, options).toPromise().then(response => {
+               resolve(response);
+           }).catch(err => {
+               reject(err);
+           });
+        }.bind(this));
+    }
+
+    /**
+     *
+     */
+    getCommunitiesRecentFilteredTrips(startDate: Date, endDate: Date): Promise<any> {
+       return new Promise(function (resolve, reject) {
+           let URL = this.BASE_URL;
+           const headers = new Headers({'Authorization': 'Bearer ' + localStorage.getItem('id_token')});
+           const options = new RequestOptions({
+               headers: headers
+           });
+
+           if (startDate !== null && endDate !== null) {
+               URL += `/api/communities/filtered_trips?startDate=${startDate.getFullYear()}-${startDate.getMonth() + 1}-${startDate.getDate()}&endDate=${endDate.getFullYear()}-${endDate.getMonth() + 1}-${endDate.getDate()}`;
+           } else if (startDate !== null) {
+               URL += `/api/communities/filtered_trips?startDate=${startDate.getFullYear()}-${startDate.getMonth() + 1}-${startDate.getDate()}`;
+           } else {
+               reject('No startDate supplied');
+           }
+
+           this.http.get(URL, options).toPromise().then(response => {
+               resolve(response);
+           }).catch(err => {
+               reject(err);
+           });
+       }.bind(this));
+    }
+
+    /**
+     *
      * @returns {RequestOptions}
      */
     getRequestOptions(): RequestOptions {

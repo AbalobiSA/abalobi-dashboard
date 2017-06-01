@@ -1,0 +1,40 @@
+<div>
+    <h2>Date Filter:</h2>
+</div>
+
+<div>
+    From Date:
+</div>
+<div>
+    <label style="width: 100%">
+        <input [(ngModel)]="startDate" (ngModelChange)="filter()" class="form-control" type="date" name="sday">
+    </label>
+</div>
+
+<div>
+    To Date:
+</div>
+<div>
+    <label style="width: 100%">
+        <input [(ngModel)]="endDate" (ngModelChange)="filter()" class="form-control" type="date" name="eday">
+    </label>
+</div>
+
+<div *ngIf="showGraph">
+    <div style="display: block">
+        <canvas baseChart
+                [datasets]="barChartData"
+                [labels]="barChartLabels"
+                [options]="barChartOptions"
+                [legend]="barChartLegend"
+                [chartType]="barChartType"
+                [colors]="barChartColors">
+        </canvas>
+    </div>
+</div>
+
+<div *ngIf="!showGraph" class="text-center">
+    <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+        <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+    </svg>
+</div>
