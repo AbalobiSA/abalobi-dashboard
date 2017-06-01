@@ -73,6 +73,8 @@ export class SearchComponent implements OnInit {
     }
 
     goto(id: string): void {
-        this.router.navigateByUrl('fisher/' + id);
+        this.router.navigateByUrl('fisher/' + id)
+            .then(() => console.log(`Navigated to fisher/${id}`))
+            .catch(() => console.log(`Could not navigate to fisher/${id}`));
     }
 }
