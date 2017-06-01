@@ -1,35 +1,48 @@
-<h2>Date Filter:</h2>
-<div class="input-group">
+<div class="row">
+    <div class="col-md-6">
+        <h2 class="text-center">Submissions by community</h2>
+        <div>
+            <h4>Date Filter:</h4>
 
-    <span class="input-group-addon" id="basic-addon1">From Date</span>
-    <input [(ngModel)]="startDate" (ngModelChange)="filter()" class="form-control" type="date" aria-describedby="basic-addon1">
-</div>
+            <div class="input-group">
 
-<div class="spacer"></div>
+                <span class="input-group-addon" id="basic-addon1">From Date</span>
+                <input [(ngModel)]="startDate" (ngModelChange)="filter()" class="form-control" type="date" aria-describedby="basic-addon1">
+            </div>
 
-<div class="input-group">
+            <div class="spacer"></div>
 
-    <span class="input-group-addon" id="basic-addon2">To Date</span>
-    <input [(ngModel)]="endDate" (ngModelChange)="filter()" class="form-control" type="date" aria-describedby="basic-addon2">
-</div>
+            <div class="input-group">
 
-<div class="spacer2"></div>
+                <span class="input-group-addon" id="basic-addon2">To Date</span>
+                <input [(ngModel)]="endDate" (ngModelChange)="filter()" class="form-control" type="date" aria-describedby="basic-addon2">
+            </div>
+        </div>
 
-<div *ngIf="showGraph">
-    <div style="display: block">
-        <canvas baseChart
-                [datasets]="barChartData"
-                [labels]="barChartLabels"
-                [options]="barChartOptions"
-                [legend]="barChartLegend"
-                [chartType]="barChartType"
-                [colors]="barChartColors">
-        </canvas>
+        <div class="spacer2"></div>
+
+        <div *ngIf="showGraph">
+            <div style="display: block">
+                <canvas baseChart
+                        [datasets]="barChartData"
+                        [labels]="barChartLabels"
+                        [options]="barChartOptions"
+                        [legend]="barChartLegend"
+                        [chartType]="barChartType"
+                        [colors]="barChartColors">
+                </canvas>
+            </div>
+        </div>
+
+        <div *ngIf="!showGraph" class="text-center">
+            <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+            </svg>
+        </div>
     </div>
 </div>
 
-<div *ngIf="!showGraph" class="text-center">
-    <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
-        <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
-    </svg>
+
+<div class="footer-spacer">
+
 </div>
