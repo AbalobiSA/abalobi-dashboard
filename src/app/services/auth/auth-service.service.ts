@@ -66,7 +66,10 @@ export class AuthService {
                         console.log('CRITIAL AUTH ERROR! \n' + err);
                     }
                     console.log('DEBUG EVENT: ' + event);
-                    if (authResult && authResult.accessToken && authResult.idToken) {
+
+
+                    if (event === true) { /*authResult && authResult.accessToken && authResult.idToken */
+                        console.log('AUTH RESULT: ' + authResult);
                         window.location.hash = '';
                         this.setSession(authResult);
                         this.router.navigate(['/home']);

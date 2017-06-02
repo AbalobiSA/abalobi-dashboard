@@ -281,13 +281,13 @@ export class FishersService {
 
     getRequestWithAuthOptions(sentBody): RequestOptions {
         const TOKEN = localStorage.getItem('id_token');
-        console.log('ACCESS TOKEN: ' + localStorage.getItem('access_token'));
-        console.log('ID TOKEN: ' + localStorage.getItem('id_token'));
+        // console.log('ACCESS TOKEN: ' + localStorage.getItem('access_token'));
+        // console.log('ID TOKEN: ' + localStorage.getItem('id_token'));
 
         const HEADERS = new Headers();
         HEADERS.append('Authorization', 'Bearer ' + localStorage.getItem('id_token'));
 
-        console.log('Auth: \n' + JSON.stringify(HEADERS, null, 4));
+        // console.log('Auth: \n' + JSON.stringify(HEADERS, null, 4));
 
         let finalRequest;
 
