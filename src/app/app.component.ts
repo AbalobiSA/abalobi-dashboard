@@ -16,7 +16,8 @@ export class AppComponent {
         public settings: DeveloperSettingsService
     ) {
         if (environment.useAuth) {
-            auth.handleAuthentication();
+            // auth.handleAuthentication();
+            auth.handleAuthenticationWithHash();
         }
     }
 }

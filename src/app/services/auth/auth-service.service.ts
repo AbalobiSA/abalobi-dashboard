@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { Event, Router, ActivatedRoute, NavigationStart, NavigationEnd } from '@angular/router';
 
 import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/take';
 
 import auth0 from 'auth0-js';
 
@@ -18,7 +19,10 @@ export class AuthService {
         scope: 'openid'
     });
 
-    constructor(public router: Router) {
+    constructor(
+        public router: Router,
+        public route: ActivatedRoute
+    ) {
     }
 
     public login(): void {
@@ -38,6 +42,50 @@ export class AuthService {
             }
         });
     }
+
+    public handleAuthenticationWithHash(): void {
+        this
+            .router
+            .events
+            .filter((event: Event) => event instanceof NavigationStart)
+            // .filter(event => (event.url !== undefined))
+            .map((event: NavigationStart) => (/access_token|id_token|error/).test(event.url))
+            // .filter(event => (/access_token|id_token|error/).test(event.url))
+            .subscribe(event => {
+                this.auth0.resumeAuth(window.location.hash, (error, authResult) => {
+                    if (error) {
+                        return console.log(error);
+                    }
+                    this.setUser(authResult);
+                    this.router.navigateByUrl('/');
+                });
+            });
+    }
+
+    // private handleRedirectWithHash2() {
+    //     this.router.events.take(1).subscribe(event => {
+    //         if (/access_token/.test(event.url) || /error/.test(event.url)) {
+    //
+    //             let authResult = this.auth0.parseHash(window.location.hash);
+    //
+    //             if (authResult && authResult.idToken) {
+    //                 this.lock.emit('authenticated', authResult);
+    //             }
+    //
+    //             if (authResult && authResult.error) {
+    //                 this.lock.emit('authorization_error', authResult);
+    //             }
+    //         }
+    //     });
+    // }
+
+    private setUser(authResult): void {
+        const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
+        localStorage.setItem('access_token', authResult.accessToken);
+        localStorage.setItem('id_token', authResult.idToken);
+        localStorage.setItem('expires_at', expiresAt);
+    }
+
 
     private setSession(authResult): void {
         // Set the time that the access token will expire at
