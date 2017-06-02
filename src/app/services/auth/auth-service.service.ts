@@ -62,6 +62,9 @@ export class AuthService {
                 //     this.router.navigateByUrl('/');
                 // });
                 this.auth0.parseHash((err, authResult) => {
+                    if (err) {
+                        console.log('CRITIAL AUTH ERROR! \n' + err);
+                    }
                     if (authResult && authResult.accessToken && authResult.idToken) {
                         window.location.hash = '';
                         this.setSession(authResult);
@@ -72,6 +75,12 @@ export class AuthService {
                             console.log('DEBUG: AUTH OBJECT: ' + JSON.stringify(authResult, null, 4));
                             console.log('DEBUG: AUTH accessToken: ' + (authResult.accessToken));
                             console.log('DEBUG: AUTH idToken: ' + (authResult.accessToken));
+
+                            console.log('STORAGE: AccessToken' + localStorage.getItem('access_token'));
+                            console.log('STORAGE: IdToken' + localStorage.getItem('id_token'));
+                            console.log('STORAGE: Expiry' + localStorage.getItem('expires_at'));
+
+
                         } catch (ex) {
                             console.log(ex);
                         }
