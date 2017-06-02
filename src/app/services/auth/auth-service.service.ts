@@ -78,19 +78,22 @@ export class AuthService {
                         this.router.navigate(['/home']);
                     } else {
 
-                        console.log('STORAGE: AccessToken' + localStorage.getItem('access_token'));
-                        console.log('STORAGE: IdToken' + localStorage.getItem('id_token'));
-                        console.log('STORAGE: Expiry' + localStorage.getItem('expires_at'));
 
-                        try {
-                            console.log('DEBUG: AUTH OBJECT: ' + JSON.stringify(authResult, null, 4));
-                            console.log('DEBUG: AUTH accessToken: ' + (authResult.accessToken));
-                            console.log('DEBUG: AUTH idToken: ' + (authResult.accessToken));
-                        } catch (ex) {
-                            console.log(ex);
-                        }
 
                         if (event === false){
+
+                            console.log('STORAGE: AccessToken' + localStorage.getItem('access_token'));
+                            console.log('STORAGE: IdToken' + localStorage.getItem('id_token'));
+                            console.log('STORAGE: Expiry' + localStorage.getItem('expires_at'));
+
+                            try {
+                                console.log('DEBUG: AUTH OBJECT: ' + JSON.stringify(authResult, null, 4));
+                                console.log('DEBUG: AUTH accessToken: ' + (authResult.accessToken));
+                                console.log('DEBUG: AUTH idToken: ' + (authResult.accessToken));
+                            } catch (ex) {
+                                console.log(ex);
+                            }
+
                             if (this.globalSwitch === false){
                                 this.login();
                             }
