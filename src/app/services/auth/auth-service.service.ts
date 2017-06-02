@@ -64,6 +64,7 @@ export class AuthService {
                         console.log('CRITIAL AUTH ERROR! \n' + err);
                     }
                     console.log('DEBUG: Auth token detected successfully? : ' + event);
+                    console.log('LOCATION HASH: ' + window.location.hash);
 
                     if (event === true) {
                         this.globalSwitch = true;
