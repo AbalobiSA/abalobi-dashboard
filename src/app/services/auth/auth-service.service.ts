@@ -49,9 +49,9 @@ export class AuthService {
         this
             .router
             .events
-            .filter((event: Event) => event instanceof NavigationStart)
+            .filter((event: Event) => event instanceof NavigationEnd)
             // .filter(event => (event.url !== undefined))
-            .map((event: NavigationStart) => (/access_token|id_token|error/).test(event.url))
+            .map((event: NavigationEnd) => (/access_token|id_token|error/).test(event.url))
             // .filter(event => (/access_token|id_token|error/).test(event.url))
             .subscribe(event => {
                 // this.auth0.resumeAuth(window.location.hash, (error, authResult) => {
@@ -78,7 +78,7 @@ export class AuthService {
 
                         setTimeout(() => {
                             this.login();
-                        }, 5000);
+                        }, 10000);
                     }
                 });
             });
