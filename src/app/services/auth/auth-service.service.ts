@@ -56,36 +56,23 @@ export class AuthService {
             .map((event: NavigationEnd) => (/access_token|id_token|error/).test(event.url))
             // .filter(event => (/access_token|id_token|error/).test(event.url))
             .subscribe(event => {
-                // this.auth0.resumeAuth(window.location.hash, (error, authResult) => {
-                //     if (error) {
-                //         return console.log(error);
-                //     }
-                //     this.setUser(authResult);
-                //     this.router.navigateByUrl('/');
-                // });
                 this.auth0.parseHash(window.location.hash, (err, authResult) => {
                     if (err) {
                         console.log('CRITIAL AUTH ERROR! \n' + err);
                     }
-                    console.log('DEBUG EVENT: ' + event);
+                    console.log('DEBUG: Auth token detected successfully? : ' + event);
 
-
-                    if (event === true) { /*authResult && authResult.accessToken && authResult.idToken */
+                    if (event === true) {
                         this.globalSwitch = true;
-                        console.log('AUTH RESULT: ' + authResult);
-                        window.location.hash = '';
+                        console.log('AUTH RESULT: ' + JSON.stringify(authResult, null, 4));
+                        // window.location.hash = '';
                         this.setSession(authResult);
                         this.router.navigate(['/home']);
                     } else {
-
-
-
-                        if (event === false){
-
+                        if (event === false) {
                             console.log('STORAGE: AccessToken' + localStorage.getItem('access_token'));
                             console.log('STORAGE: IdToken' + localStorage.getItem('id_token'));
                             console.log('STORAGE: Expiry' + localStorage.getItem('expires_at'));
-
                             try {
                                 console.log('DEBUG: AUTH OBJECT: ' + JSON.stringify(authResult, null, 4));
                                 console.log('DEBUG: AUTH accessToken: ' + (authResult.accessToken));
@@ -94,15 +81,10 @@ export class AuthService {
                                 console.log(ex);
                             }
 
-                            if (this.globalSwitch === false){
+                            if (this.globalSwitch === false) {
                                 this.login();
                             }
                         }
-
-
-                        // setTimeout(() => {
-                        //     this.login();
-                        // }, 10000);
                     }
                 });
             });
