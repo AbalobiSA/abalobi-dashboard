@@ -19,6 +19,8 @@ export class AuthService {
         scope: 'openid'
     });
 
+    _this = this;
+
     constructor(
         public router: Router,
         public route: ActivatedRoute
@@ -66,7 +68,7 @@ export class AuthService {
                         this.router.navigate(['/home']);
                     } else {
 
-                        try{
+                        try {
                             console.log('DEBUG: AUTH OBJECT: ' + JSON.stringify(authResult, null, 4));
                             console.log('DEBUG: AUTH accessToken: ' + (authResult.accessToken));
                             console.log('DEBUG: AUTH idToken: ' + (authResult.accessToken));
@@ -74,7 +76,9 @@ export class AuthService {
                             console.log(ex);
                         }
 
-                        setTimeout(this.login, 10000);
+                        setTimeout(() => {
+                            this.login();
+                        }, 5000);
                     }
                 });
             });
