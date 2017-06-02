@@ -66,9 +66,13 @@ export class AuthService {
                         this.router.navigate(['/home']);
                     } else {
 
-                        console.log('DEBUG: AUTH OBJECT: ' + JSON.stringify(authResult, null, 4));
-                        console.log('DEBUG: AUTH accessToken: ' + (authResult.accessToken));
-                        console.log('DEBUG: AUTH idToken: ' + (authResult.accessToken));
+                        try{
+                            console.log('DEBUG: AUTH OBJECT: ' + JSON.stringify(authResult, null, 4));
+                            console.log('DEBUG: AUTH accessToken: ' + (authResult.accessToken));
+                            console.log('DEBUG: AUTH idToken: ' + (authResult.accessToken));
+                        } catch (ex) {
+                            console.log(ex);
+                        }
 
                         setTimeout(function(){
                             this.login();
