@@ -74,9 +74,7 @@ export class AuthService {
                             console.log(ex);
                         }
 
-                        setTimeout(function(){
-                            this.login();
-                        }, 10000);
+                        setTimeout(this.login, 10000);
                     }
                 });
             });
