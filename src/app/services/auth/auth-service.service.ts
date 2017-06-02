@@ -87,9 +87,14 @@ export class AuthService {
                             console.log(ex);
                         }
 
-                        setTimeout(() => {
+                        if (event === false){
                             this.login();
-                        }, 10000);
+                        }
+
+
+                        // setTimeout(() => {
+                        //     this.login();
+                        // }, 10000);
                     }
                 });
             });
