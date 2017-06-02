@@ -1,153 +1,91 @@
-import { Injectable } from '@angular/core';
-import { Event, Router, ActivatedRoute, NavigationStart, NavigationEnd } from '@angular/router';
+import {Injectable} from '@angular/core';
+import {Router} from '@angular/router';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+// import { AUTH_CONFIG } from './auth0-variables';
+import {tokenNotExpired} from 'angular2-jwt';
 
-import 'rxjs/add/operator/filter';
-import 'rxjs/add/operator/take';
-
-import auth0 from 'auth0-js';
+// Avoid name not found warnings
+declare var auth0: any;
 
 @Injectable()
 export class AuthService {
-
+    // Create Auth0 web auth instance
+    // @TODO: Update AUTH_CONFIG and remove .example extension in src/app/auth/auth0-variables.ts.example
     auth0 = new auth0.WebAuth({
         clientID: 'FjJZhJDTzEIjR0Yj1vjZABJuwBZ6gCzQ',
-        domain: 'app56729554.eu.auth0.com',
-        responseType: 'token id_token',
-        audience: 'https://app56729554.eu.auth0.com/userinfo',
-        // redirectUri: 'http://localhost:8080/#/home',
-        redirectUri: 'http://abalobi-dashboard-ng2.herokuapp.com/#/home',
-        scope: 'openid'
+        domain: 'app56729554.eu.auth0.com'
     });
 
-    globalSwitch = false;
+    // Create a stream of logged in status to communicate throughout app
+    loggedIn: boolean;
+    loggedIn$ = new BehaviorSubject<boolean>(this.loggedIn);
 
-    _this = this;
-
-    constructor(
-        public router: Router,
-        public route: ActivatedRoute
-    ) {
+    constructor(private router: Router) {
+        // If authenticated, set local profile property and update login status subject
+        if (this.authenticated) {
+            this.setLoggedIn(true);
+        }
     }
 
-    public login(): void {
-        this.auth0.popup.authorize();
-
-        console.log(localStorage.getItem('access_token'));
+    setLoggedIn(value: boolean) {
+        // Update login status subject
+        this.loggedIn$.next(value);
+        this.loggedIn = value;
     }
 
-    public handleAuthentication(): void {
+    login() {
+        // Auth0 authorize request
+        // Note: nonce is automatically generated: https://auth0.com/docs/libraries/auth0js/v8#using-nonce
+        this.auth0.authorize({
+            responseType: 'token id_token',
+            audience: 'https://app56729554.eu.auth0.com/userinfo',
+            // redirectUri: 'http://localhost:8080/#/home',
+            redirectUri: 'http://abalobi-dashboard-ng2.herokuapp.com/#/home',
+            scope: 'openid'
+        });
+    }
+
+    handleAuth() {
+        // When Auth0 hash parsed, get profile
         this.auth0.parseHash((err, authResult) => {
             if (authResult && authResult.accessToken && authResult.idToken) {
                 window.location.hash = '';
-                this.setSession(authResult);
-                this.router.navigate(['/home']);
-            } else {
-                this.login();
+                this._getProfile(authResult);
+                this.router.navigate(['/']);
+            } else if (err) {
+                this.router.navigate(['/']);
+                console.error(`Error: ${err.error}`);
             }
         });
     }
 
-    public handleAuthenticationWithHash(): void {
-
-        console.log('DEBUG: BEGINNING AUTHENTICATION CHECK...');
-
-        this
-            .router
-            .events
-            .filter((event: Event) => event instanceof NavigationEnd)
-            // .filter(event => (event.url !== undefined))
-            .map((event: NavigationEnd) => (/access_token|id_token|error/).test(event.url))
-            // .filter(event => (/access_token|id_token|error/).test(event.url))
-            .subscribe(event => {
-                this.auth0.parseHash(window.location.hash, (err, authResult) => {
-                    if (err) {
-                        console.log('CRITIAL AUTH ERROR! \n' + err);
-                    }
-                    console.log('DEBUG: Auth token detected successfully? : ' + event);
-                    console.log('LOCATION HASH: ' + window.location.hash);
-
-                    if (event === true) {
-                        this.globalSwitch = true;
-                        console.log('AUTH RESULT: ' + JSON.stringify(authResult, null, 4));
-                        // window.location.hash = '';
-                        this.setSession(authResult);
-                        setTimeout(() => {
-                            this.router.navigate(['/home']);
-                        }, 2000);
-                        // this.router.navigate(['/home']);
-                    } else {
-                        if (event === false) {
-                            if (this.globalSwitch === false) {
-
-                                console.log('STORAGE: AccessToken' + localStorage.getItem('access_token'));
-                                console.log('STORAGE: IdToken' + localStorage.getItem('id_token'));
-                                console.log('STORAGE: Expiry' + localStorage.getItem('expires_at'));
-
-                                try {
-                                    console.log('DEBUG: AUTH OBJECT: ' + JSON.stringify(authResult, null, 4));
-                                    console.log('DEBUG: AUTH accessToken: ' + (authResult.accessToken));
-                                    console.log('DEBUG: AUTH idToken: ' + (authResult.accessToken));
-                                } catch (ex) {
-                                    console.log(ex);
-                                }
-
-                                this.login();
-                            }
-                        }
-                    }
-                });
-            });
+    private _getProfile(authResult) {
+        // Use access token to retrieve user's profile and set session
+        this.auth0.client.userInfo(authResult.accessToken, (err, profile) => {
+            this._setSession(authResult, profile);
+        });
     }
 
-    // private handleRedirectWithHash2() {
-    //     this.router.events.take(1).subscribe(event => {
-    //         if (/access_token/.test(event.url) || /error/.test(event.url)) {
-    //
-    //             let authResult = this.auth0.parseHash(window.location.hash);
-    //
-    //             if (authResult && authResult.idToken) {
-    //                 this.lock.emit('authenticated', authResult);
-    //             }
-    //
-    //             if (authResult && authResult.error) {
-    //                 this.lock.emit('authorization_error', authResult);
-    //             }
-    //         }
-    //     });
-    // }
-
-    private setUser(authResult): void {
-        const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
-        localStorage.setItem('access_token', authResult.accessToken);
+    private _setSession(authResult, profile) {
+        // Save session data and update login status subject
+        localStorage.setItem('token', authResult.accessToken);
         localStorage.setItem('id_token', authResult.idToken);
-        localStorage.setItem('expires_at', expiresAt);
+        localStorage.setItem('profile', JSON.stringify(profile));
+        this.setLoggedIn(true);
     }
 
-
-    private setSession(authResult): void {
-        // Set the time that the access token will expire at
-        const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
-        localStorage.setItem('access_token', authResult.accessToken);
-        localStorage.setItem('id_token', authResult.idToken);
-        localStorage.setItem('expires_at', expiresAt);
-    }
-
-    public logout(): void {
-        // Remove tokens and expiry time from localStorage
-        localStorage.removeItem('access_token');
+    logout() {
+        // Remove tokens and profile and update login status subject
+        localStorage.removeItem('token');
         localStorage.removeItem('id_token');
-        localStorage.removeItem('expires_at');
-
-        console.log('User logged out');
-        this.globalSwitch = false;
-        this.login();
+        localStorage.removeItem('profile');
+        this.router.navigate(['/']);
+        this.setLoggedIn(false);
     }
 
-    public isAuthenticated(): boolean {
-        // Check whether the current time is past the
-        // access token's expiry time
-        const expiresAt = JSON.parse(localStorage.getItem('expires_at'));
-        return new Date().getTime() < expiresAt;
+    get authenticated() {
+        // Check if there's an unexpired access token
+        return tokenNotExpired('token');
     }
 
 }

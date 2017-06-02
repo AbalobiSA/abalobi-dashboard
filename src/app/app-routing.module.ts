@@ -1,6 +1,8 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {RouterModule, Routes} from '@angular/router';
+import {RouterModule, Routes, CanActivate} from '@angular/router';
+
+import { AuthGuard } from './services/auth-guard/auth-guard.service';
 
 // import { AppComponent } from './app.component';
 import {HomeComponent} from './components/home/home.component';
@@ -30,7 +32,7 @@ const routes: Routes = [
         redirectTo: 'home',
         pathMatch: 'full'
     },
-    { path: 'home', component: HomeComponent },
+    { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
     { path: 'search', component: SearchComponent },
     { path: 'tools', component: ToolsComponent,
         children: [

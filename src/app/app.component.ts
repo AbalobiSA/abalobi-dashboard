@@ -17,7 +17,7 @@ export class AppComponent {
     ) {
         if (environment.useAuth) {
             // auth.handleAuthentication();
-            auth.handleAuthenticationWithHash();
+            // auth.handleAuthenticationWithHash();
         }
     }
 }
