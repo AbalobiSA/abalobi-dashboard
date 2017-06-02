@@ -30,7 +30,7 @@ export class AuthService {
     }
 
     public login(): void {
-        this.auth0.authorize();
+        this.auth0.popup.authorize();
 
         console.log(localStorage.getItem('access_token'));
     }
