@@ -19,6 +19,8 @@ export class AuthService {
         scope: 'openid'
     });
 
+    globalSwitch = false;
+
     _this = this;
 
     constructor(
@@ -69,6 +71,7 @@ export class AuthService {
 
 
                     if (event === true) { /*authResult && authResult.accessToken && authResult.idToken */
+                        this.globalSwitch = true;
                         console.log('AUTH RESULT: ' + authResult);
                         window.location.hash = '';
                         this.setSession(authResult);
@@ -88,7 +91,9 @@ export class AuthService {
                         }
 
                         if (event === false){
-                            this.login();
+                            if (this.globalSwitch === false){
+                                this.login();
+                            }
                         }
 
 
@@ -140,6 +145,7 @@ export class AuthService {
         localStorage.removeItem('expires_at');
 
         console.log('User logged out');
+        this.globalSwitch = false;
         this.login();
     }
 
