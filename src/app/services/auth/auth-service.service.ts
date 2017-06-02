@@ -65,7 +65,14 @@ export class AuthService {
                         this.setSession(authResult);
                         this.router.navigate(['/home']);
                     } else {
-                        // this.login();
+
+                        console.log('DEBUG: AUTH OBJECT: ' + JSON.stringify(authResult, null, 4));
+                        console.log('DEBUG: AUTH accessToken: ' + (authResult.accessToken));
+                        console.log('DEBUG: AUTH idToken: ' + (authResult.accessToken));
+
+                        setTimeout(function(){
+                            this.login();
+                        }, 10000);
                     }
                 });
             });
