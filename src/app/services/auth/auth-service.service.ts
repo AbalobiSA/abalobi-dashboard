@@ -65,7 +65,7 @@ export class AuthService {
                         this.setSession(authResult);
                         this.router.navigate(['/home']);
                     } else {
-                        this.login();
+                        // this.login();
                     }
                 });
             });
