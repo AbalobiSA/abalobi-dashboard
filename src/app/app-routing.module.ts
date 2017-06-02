@@ -55,15 +55,17 @@ const routes: Routes = [
             {path: 'bio', component: FisherBioComponent}
         ]
     },
-    {
-        path: 'communities',
-        component: CommunitiesComponent,
+    { path: 'communities', component: CommunitiesComponent,
         children: [
             {path: '', redirectTo: 'list', pathMatch: 'full'},
             {path: 'list', component: CommunitiesListComponent},
             {path: 'stats', component: CommunitiesStatsComponent},
             {path: ':id/fishers', component: CommunityFishersComponent}
         ]
+    },
+    {
+        path: '/*path',
+        redirectTo: 'home'
     }
 ];
 

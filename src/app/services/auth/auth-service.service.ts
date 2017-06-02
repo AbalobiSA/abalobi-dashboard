@@ -49,7 +49,7 @@ export class AuthService {
 
     public handleAuthenticationWithHash(): void {
 
-        console.log("DEBUG: BEGINNING AUTHENTICATION CHECK...");
+        console.log('DEBUG: BEGINNING AUTHENTICATION CHECK...');
 
         this
             .router
