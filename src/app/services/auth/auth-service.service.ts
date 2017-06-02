@@ -71,7 +71,10 @@ export class AuthService {
                         console.log('AUTH RESULT: ' + JSON.stringify(authResult, null, 4));
                         // window.location.hash = '';
                         this.setSession(authResult);
-                        this.router.navigate(['/home']);
+                        setTimeout(() => {
+                            this.router.navigate(['/home']);
+                        }, 2000);
+                        // this.router.navigate(['/home']);
                     } else {
                         if (event === false) {
                             if (this.globalSwitch === false) {
