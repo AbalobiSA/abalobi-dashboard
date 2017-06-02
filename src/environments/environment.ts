@@ -5,6 +5,9 @@
 
 export const environment = {
     production: false,
-    useAuth: false,
-    API_URL: 'http://localhost:8080'
+    // useAuth: false,
+    useAuth: true,
+    // API_URL: 'http://localhost:8080'
+    API_URL: 'http://197.85.186.65:8080'
+
 };

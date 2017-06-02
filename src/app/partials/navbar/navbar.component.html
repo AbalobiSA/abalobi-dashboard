@@ -22,7 +22,7 @@
 
             <!--Right hand side-->
             <ul class="nav navbar-nav navbar-right">
-                <li class="nav-item" *ngIf="auth.isAuthenticated()"><a class="nav-link" (click)="auth.logout()">Logout</a></li>
+                <li class="nav-item" *ngIf="auth.loggedIn"><a class="nav-link" (click)="auth.logout()">Logout</a></li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
