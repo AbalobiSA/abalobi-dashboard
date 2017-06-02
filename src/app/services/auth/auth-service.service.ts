@@ -61,7 +61,7 @@ export class AuthService {
                 //     this.setUser(authResult);
                 //     this.router.navigateByUrl('/');
                 // });
-                this.auth0.parseHash((err, authResult) => {
+                this.auth0.parseHash(window.location.hash, (err, authResult) => {
                     if (err) {
                         console.log('CRITIAL AUTH ERROR! \n' + err);
                     }
