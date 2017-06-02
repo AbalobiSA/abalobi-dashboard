@@ -52,12 +52,21 @@ export class AuthService {
             .map((event: NavigationStart) => (/access_token|id_token|error/).test(event.url))
             // .filter(event => (/access_token|id_token|error/).test(event.url))
             .subscribe(event => {
-                this.auth0.resumeAuth(window.location.hash, (error, authResult) => {
-                    if (error) {
-                        return console.log(error);
+                // this.auth0.resumeAuth(window.location.hash, (error, authResult) => {
+                //     if (error) {
+                //         return console.log(error);
+                //     }
+                //     this.setUser(authResult);
+                //     this.router.navigateByUrl('/');
+                // });
+                this.auth0.parseHash((err, authResult) => {
+                    if (authResult && authResult.accessToken && authResult.idToken) {
+                        window.location.hash = '';
+                        this.setSession(authResult);
+                        this.router.navigate(['/home']);
+                    } else {
+                        this.login();
                     }
-                    this.setUser(authResult);
-                    this.router.navigateByUrl('/');
                 });
             });
     }
