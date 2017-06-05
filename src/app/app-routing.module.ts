@@ -64,7 +64,8 @@ const routes: Routes = [
             {path: 'stats', component: CommunitiesStatsComponent},
             {path: ':id/fishers', component: CommunityFishersComponent}
         ]
-    }
+    },
+    { path: '**', redirectTo: 'home' }
 ];
 
 // Use hash in location routes, for hosting on heroku
