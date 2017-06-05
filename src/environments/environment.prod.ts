@@ -6,5 +6,7 @@
 export const environment = {
     production: true,
     useAuth: true,
-    API_URL: 'http://197.85.186.65:8080'
+    API_URL: 'http://197.85.186.65:8080',
+    HOSTED_LOCALLY: false,
+    redirectURL: 'http://197.85.186.65:8080/#/home'
 };

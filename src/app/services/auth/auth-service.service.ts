@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 import 'rxjs/add/operator/filter';
 
@@ -14,7 +15,7 @@ export class AuthService {
         responseType: 'token id_token',
         audience: 'https://app56729554.eu.auth0.com/userinfo',
         // redirectUri: 'http://localhost:8080/#/home',
-        redirectUri: 'http://abalobi-dashboard-ng2.herokuapp.com/#/home',
+        redirectUri: environment.redirectURL,
         scope: 'openid'
     });
 
