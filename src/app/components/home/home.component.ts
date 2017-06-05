@@ -38,6 +38,12 @@ export class HomeComponent implements OnInit {
 
         this.calc_new_registrations = counter;
     }
+
+    debugLogin(): void {
+        console.log("AUTH INFO: " + localStorage.getItem('access_token'));
+        console.log("AUTH INFO: " + localStorage.getItem('id_token'));
+        console.log("AUTH INFO: " + localStorage.getItem('expires_at'));
+    }
 }
 
 

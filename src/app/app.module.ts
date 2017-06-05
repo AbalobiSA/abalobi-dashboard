@@ -41,6 +41,7 @@ import { RegRecentComponent } from './components/tools/registrations/reg-recent/
 import { CommunityFishersComponent } from './components/communities/community-fishers/community-fishers.component';
 import { CommunitiesStatsComponent } from './components/communities/communities-stats/communities-stats.component';
 import { LinksComponent } from './components/tools/links/links.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
     declarations: [
@@ -76,7 +77,9 @@ import { LinksComponent } from './components/tools/links/links.component';
         LinksComponent,
         CommunityFishersComponent,
 
-        CommunitiesStatsComponent
+        CommunitiesStatsComponent,
+
+        LoginComponent
     ],
     imports: [
         BrowserModule,

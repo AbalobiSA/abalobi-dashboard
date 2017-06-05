@@ -21,15 +21,17 @@ import {RegRecentComponent} from './components/tools/registrations/reg-recent/re
 import {CommunityFishersComponent} from './components/communities/community-fishers/community-fishers.component';
 import {LinksComponent} from './components/tools/links/links.component';
 import {CommunitiesStatsComponent} from './components/communities/communities-stats/communities-stats.component';
+import {LoginComponent} from './components/login/login.component';
 
 
 const routes: Routes = [
     {
         // Default path
         path: '',
-        redirectTo: 'home',
+        redirectTo: 'login',
         pathMatch: 'full'
     },
+    { path: 'login', component: LoginComponent },
     { path: 'home', component: HomeComponent },
     { path: 'search', component: SearchComponent },
     { path: 'tools', component: ToolsComponent,

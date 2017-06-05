@@ -287,7 +287,7 @@ export class FishersService {
         const HEADERS = new Headers();
         HEADERS.append('Authorization', 'Bearer ' + localStorage.getItem('id_token'));
 
-        console.log('Auth: \n' + JSON.stringify(HEADERS, null, 4));
+                console.log('Auth: \n' + JSON.stringify(HEADERS, null, 4));
 
         let finalRequest;
 

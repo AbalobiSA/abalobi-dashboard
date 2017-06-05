@@ -1,43 +1,140 @@
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { environment } from '../../../environments/environment';
-
+// import { Injectable } from '@angular/core';
+// import { Router } from '@angular/router';
+// import { environment } from '../../../environments/environment';
+//
+// import 'rxjs/add/operator/filter';
+//
+// import auth0 from 'auth0-js';
+//
+// @Injectable()
+// export class AuthService {
+//
+//     auth0 = new auth0.WebAuth({
+//         clientID: 'FjJZhJDTzEIjR0Yj1vjZABJuwBZ6gCzQ',
+//         domain: 'app56729554.eu.auth0.com',
+//         responseType: 'token id_token',
+//         audience: 'https://app56729554.eu.auth0.com/userinfo',
+//         // redirectUri: 'http://localhost:8080/#/home',
+//         redirectUri: environment.redirectURL,
+//         scope: 'openid'
+//     });
+//
+//     constructor(public router: Router) {
+//     }
+//
+//     public login(): void {
+//         this.auth0.authorize();
+//
+//         console.log(localStorage.getItem('access_token'));
+//     }
+//
+//     public handleAuthentication(): void {
+//         this.auth0.parseHash((err, authResult) => {
+//             if (authResult && authResult.accessToken && authResult.idToken) {
+//                 window.location.hash = '';
+//                 this.setSession(authResult);
+//                 this.router.navigate(['/home']);
+//             } else {
+//                 this.login();
+//             }
+//         });
+//     }
+//
+//     private setSession(authResult): void {
+//         // Set the time that the access token will expire at
+//         const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
+//         localStorage.setItem('access_token', authResult.accessToken);
+//         localStorage.setItem('id_token', authResult.idToken);
+//         localStorage.setItem('expires_at', expiresAt);
+//     }
+//
+//     public logout(): void {
+//         // Remove tokens and expiry time from localStorage
+//         localStorage.removeItem('access_token');
+//         localStorage.removeItem('id_token');
+//         localStorage.removeItem('expires_at');
+//
+//         console.log('User logged out');
+//         this.login();
+//     }
+//
+//     public isAuthenticated(): boolean {
+//         // Check whether the current time is past the
+//         // access token's expiry time
+//         const expiresAt = JSON.parse(localStorage.getItem('expires_at'));
+//         return new Date().getTime() < expiresAt;
+//     }
+//
+// }
+import {Injectable} from '@angular/core';
+import {AUTH_CONFIG} from './auth0-variables';
+import {Router, NavigationStart} from '@angular/router';
 import 'rxjs/add/operator/filter';
-
-import auth0 from 'auth0-js';
+import Auth0Lock from 'auth0-lock';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class AuthService {
 
-    auth0 = new auth0.WebAuth({
-        clientID: 'FjJZhJDTzEIjR0Yj1vjZABJuwBZ6gCzQ',
-        domain: 'app56729554.eu.auth0.com',
-        responseType: 'token id_token',
-        audience: 'https://app56729554.eu.auth0.com/userinfo',
-        // redirectUri: 'http://localhost:8080/#/home',
-        redirectUri: environment.redirectURL,
-        scope: 'openid'
-    });
+    lock = new Auth0Lock(
+        AUTH_CONFIG.clientID,
+        AUTH_CONFIG.domain, {
+            oidcConformant: true,
+            autoclose: true,
+            auth: {
+                redirectUrl: environment.redirectURL,
+                responseType: 'token id_token',
+                audience: `https://app56729554.eu.auth0.com/userinfo`,
+                params: {
+                    scope: 'openid'
+                }
+            }
+        });
 
     constructor(public router: Router) {
     }
 
     public login(): void {
-        this.auth0.authorize();
-
-        console.log(localStorage.getItem('access_token'));
+        this.lock.show();
     }
 
+    // Call this method in app.component
+    // if using path-based routing
     public handleAuthentication(): void {
-        this.auth0.parseHash((err, authResult) => {
+        this.lock.on('authenticated', (authResult) => {
             if (authResult && authResult.accessToken && authResult.idToken) {
-                window.location.hash = '';
                 this.setSession(authResult);
                 this.router.navigate(['/home']);
-            } else {
-                this.login();
             }
         });
+        this.lock.on('authorization_error', (err) => {
+            this.router.navigate(['/']);
+            console.log(err);
+            alert(`Error: ${err.error}. Check the console for further details.`);
+        });
+    }
+
+    // Call this method in app.component
+    // if using hash-based routing
+    public handleAuthenticationWithHash(): void {
+        this
+            .router
+            .events
+            .filter(event => event instanceof NavigationStart)
+            .filter((event: NavigationStart) => (/access_token|id_token|error/).test(event.url))
+            .subscribe(() => {
+                this.lock.resumeAuth(window.location.hash, (err, authResult) => {
+                    // console.log("DEBUG: AUTHRESULT" + authResult);
+                    if (err) {
+                        this.router.navigate(['/home']);
+                        console.log(err);
+                        alert(`Error: ${err.error}. Check the console for further details.`);
+                        return;
+                    }
+                    this.setSession(authResult);
+                    this.router.navigate(['/']);
+                });
+            });
     }
 
     private setSession(authResult): void {
@@ -53,8 +150,8 @@ export class AuthService {
         localStorage.removeItem('access_token');
         localStorage.removeItem('id_token');
         localStorage.removeItem('expires_at');
-
-        console.log('User logged out');
+        // Go back to the home route
+        this.router.navigate(['/']);
         this.login();
     }
 
