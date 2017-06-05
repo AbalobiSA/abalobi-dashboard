@@ -8,5 +8,5 @@ export const environment = {
     useAuth: true,
     API_URL: 'http://197.85.186.65:8080',
     HOSTED_LOCALLY: false,
-    redirectURL: 'http://197.85.186.65:8080/#/home'
+    redirectURL: 'http://abalobi-dashboard-ng2.herokuapp.com/#/home'
 };
