@@ -8,7 +8,7 @@ export const environment = {
     // useAuth: false,
     // API_URL: 'http://localhost:8080',
     production: true,
-    useAuth: true,
+    useAuth: false,
     API_URL: 'http://197.85.186.65:8080',
     HOSTED_LOCALLY: true,
     redirectURL: 'http://localhost:4200/#/home'

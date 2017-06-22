@@ -40,7 +40,8 @@
     </tr>
     <tr>
         <td>
-            <a href="https://addons-sso.heroku.com/apps/64c5a303-59d1-4054-af2a-4c24d0bf8ca1/addons/7c1b0abc-55b0-4cfb-82ee-c4cae9fda731" target="_blank">
+            <a href="https://addons-sso.heroku.com/apps/64c5a303-59d1-4054-af2a-4c24d0bf8ca1/addons/7c1b0abc-55b0-4cfb-82ee-c4cae9fda731"
+               target="_blank">
                 • Auth0 Settings
             </a>
         </td>
@@ -48,10 +49,18 @@
     </tbody>
 </table>
 
+<div>
+    <h3>Useful Info</h3>
+    <p>
+        MessageG8 SMS Number:
+        <code>8200702232291</code>
+    </p>
+</div>
+
 <div class="cs-button-footer">
     <button class="btn btn-default" (click)="toggleGuide()">
-        <span *ngIf="GUIDE_OPEN === false" > <fa name="arrow-right"></fa> Show Registration Guide</span>
-        <span *ngIf="GUIDE_OPEN === true" > <fa name="arrow-down"></fa> Hide Registration Guide</span>
+        <span *ngIf="GUIDE_OPEN === false"> <fa name="arrow-right"></fa> Show Registration Guide</span>
+        <span *ngIf="GUIDE_OPEN === true"> <fa name="arrow-down"></fa> Hide Registration Guide</span>
     </button>
 </div>
 
@@ -60,25 +69,29 @@
 </div>
 <div id="guide" *ngIf="GUIDE_OPEN === true">
 
-    <h1 id="1createsfusers">1 - Create SF users  </h1>
+    <h1 id="1createsfusers">1 - Create SF users </h1>
 
     <ol>
         <li><a href="https://eu5.salesforce.com/a0l/o">Open Ablb_Registrations page</a></li>
 
         <li>Click on the new Registration entry you want to action</li>
 
-        <li>Click on the button "Create New User". Ensure that the output shows successful user creation. Note any errors (e.g. boat or pwd problems)</li>
+        <li>Click on the button "Create New User". Ensure that the output shows successful user creation. Note any
+            errors (e.g. boat or pwd problems)
+        </li>
     </ol>
 
     <p>Repeat for all users before going on to next step</p>
 
     <h1 id="21usenodeserverfornewmembers">2.1 - Use Node Server for new members</h1>
 
-    <p>Run <code>node index</code> in the registration directory, which will generate the required <code>newusers.csv</code></p>
+    <p>Run <code>node index</code> in the registration directory, which will generate the required
+        <code>newusers.csv</code></p>
 
     <h1 id="22manuallyexportlistofregistrations">2.2 - Manually Export list of registrations </h1>
 
-    <p>Use <a href="https://workbench.developerforce.com/query.php">SF Workbench</a> or DataLoader to export the new registrations: <br />
+    <p>Use <a href="https://workbench.developerforce.com/query.php">SF Workbench</a> or DataLoader to export the new
+        registrations: <br/>
         (set the date as needed)</p>
 
     <pre><code>SELECT AA_assigned_username__c, AA_assigned_abalobi_id__c, password__c,home_community__c FROM Ablb_Registration__c WHERE CreatedDate &gt; 2017-01-17T00:01:01+02:00
@@ -99,16 +112,20 @@ Community
     <h1 id="3updateodkformwithnewusers">3 - Update ODK form with new users: </h1>
 
     <ul>
-        <li>Run "Download Fisher Forms" from the <a href="http://abalobi-dashboard-ng2.herokuapp.com/">Abalobi Dashboard</a>    </li>
+        <li>Run "Download Fisher Forms" from the <a href="http://abalobi-dashboard-ng2.herokuapp.com/">Abalobi
+            Dashboard</a></li>
 
-        <li>Extract the zip file - should have a form xml and a zip.  Check that List_Fishers.csv has some new fishers added. (Managers/Assistants won't show here)</li>
+        <li>Extract the zip file - should have a form xml and a zip. Check that List_Fishers.csv has some new fishers
+            added. (Managers/Assistants won't show here)
+        </li>
     </ul>
 
     <p>Log in to:
         https://abalobi-fisher.appspot.com/Aggregate.html#management/forms///</p>
 
     <blockquote>
-        <p>(Avoid going directly to the Submissions tab (https://abalobi-fisher.appspot.com/Aggregate.html) as it chows our free quota </p>
+        <p>(Avoid going directly to the Submissions tab (https://abalobi-fisher.appspot.com/Aggregate.html) as it chows
+            our free quota </p>
     </blockquote>
 
     <pre><code class="   language-  ">Click "Add New Form"
@@ -117,9 +134,10 @@ Upload the zip media files
 Click Upload Form. This may take a while.
 </code></pre>
 
-    <p>Once done, go back to the Forms List, click on the Title of the form and search for the second "version" string - check that it is as expected (starts with today's date)</p>
+    <p>Once done, go back to the Forms List, click on the Title of the form and search for the second "version" string -
+        check that it is as expected (starts with today's date)</p>
 
-    <h1 id="4addnewuserstoodkaggregate">4 - Add new users to ODK Aggregate  </h1>
+    <h1 id="4addnewuserstoodkaggregate">4 - Add new users to ODK Aggregate </h1>
 
     <p>(if not already logged in) Log in to:
         <a href="https://abalobi-fisher.appspot.com/Aggregate.html#admin/permission///">Abalobi ODK Permissions</a></p>
@@ -127,9 +145,9 @@ Click Upload Form. This may take a while.
     <p>Click "DOWNLOAD current UsersAndCapabilities.csv". Save file locally.
         Make a copy of the file new_UsersAndCapabilities.csv</p>
 
-    <p>Copy newusers.csv into the bottom of new_UsersAndCapabilities.csv  (leave out the Community column)
+    <p>Copy newusers.csv into the bottom of new_UsersAndCapabilities.csv (leave out the Community column)
         Copy "ODK" into all new users
-        Copy "X" into all new users   (NB - not the Anonymous user)</p>
+        Copy "X" into all new users (NB - not the Anonymous user)</p>
 
     <p>NB: DON'T REMOVE any users from the list - this will delete them.</p>
 
